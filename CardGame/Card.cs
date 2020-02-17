@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CardGame
 {
-    class Card
+    public class Card
     {
         public int HP { get; }
         public int Attack { get; }
