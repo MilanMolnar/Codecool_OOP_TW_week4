@@ -4,21 +4,21 @@ using System.Text;
 
 namespace CardGame
 {
-    class Player : IPlayer
+    class BotPlayer : IPlayer
     {
         List<Card> listOfCards;
         Card TopCard { get; set; }
         int ID { get; set; }
         bool isWinner { get; set; }
 
-        public Player()
+        public BotPlayer()
         {
             this.listOfCards = new List<Card>();
         }
 
         public int ChooseAttributes(Card topCard, string attribute)
         {
-            if(attribute.ToLower().Equals("hp"))
+            if (attribute.ToLower().Equals("hp"))
             {
                 return topCard.HP;
             }
@@ -42,7 +42,7 @@ namespace CardGame
 
         public void TakeCards(List<Card> topCards)
         {
-            foreach(var card in topCards)
+            foreach (var card in topCards)
             {
                 this.listOfCards.Add(card);
             }
