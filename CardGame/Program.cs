@@ -8,12 +8,23 @@ namespace CardGame
     {
         static void Main(string[] args)
         {
-            string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/CardGame/Cards.xml");
-            XmlLoader xmlLoader = new XmlLoader();
-            List<Card> ListOfCards = xmlLoader.LoadCards(path);
-            foreach (var card in ListOfCards)
+            List<Player> playerList = new List<Player>();
+            var deck = new Deck();
+            Console.Write("How many players are in this round: ");
+            var numOfPlayers = Convert.ToInt32(Console.ReadLine());
+
+            for (int i = 0; i < numOfPlayers; i++)
             {
-                Console.WriteLine(card.Attack);
+                playerList.Add(new Player(deck, numOfPlayers));
+            }
+
+            foreach (var player in playerList)
+            {
+                Console.Write(player + ": ");
+                foreach (var card in player.listOfCards)
+                {
+                    Console.WriteLine(card.Attack);
+                }
             }
         }
     }

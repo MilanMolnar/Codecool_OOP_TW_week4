@@ -6,7 +6,7 @@ namespace CardGame
 {
     class BotPlayer : IPlayer
     {
-        List<Card> listOfCards;
+        public List<Card> listOfCards;
         Card TopCard { get; set; }
         int ID { get; set; }
         bool isWinner { get; set; }

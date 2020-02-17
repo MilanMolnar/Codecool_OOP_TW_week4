@@ -6,19 +6,19 @@ namespace CardGame
 {
     class Player : IPlayer
     {
-        List<Card> listOfCards;
-        Card TopCard { get; set; }
+        public List<Card> listOfCards;
+        public Card TopCard { get; set; }
         int ID { get; set; }
         bool isWinner { get; set; }
 
-        public Player()
+        public Player(Deck deck, int numOfPlayers)
         {
-            this.listOfCards = new List<Card>();
+            this.listOfCards = deck.DealCards(numOfPlayers);
         }
 
         public int ChooseAttributes(Card topCard, string attribute)
         {
-            if(attribute.ToLower().Equals("hp"))
+            if (attribute.ToLower().Equals("hp"))
             {
                 return topCard.HP;
             }
@@ -42,10 +42,14 @@ namespace CardGame
 
         public void TakeCards(List<Card> topCards)
         {
-            foreach(var card in topCards)
+            foreach (var card in topCards)
             {
                 this.listOfCards.Add(card);
             }
+        }
+        public int GetCardCount()
+        {
+            return listOfCards.Count;
         }
     }
 }
