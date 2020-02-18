@@ -22,12 +22,14 @@ namespace CardGame
             {
                 if(count<=numOfPlayers-NumOfBotPlayers)
                 {
-                    HumanPlayer human = new HumanPlayer(deck, numOfPlayers, count, false);
+                    UserControl userControl = new UserControl();
+                    string name=userConstrol
+                    HumanPlayer human = new HumanPlayer(deck, numOfPlayers, name, false);
                     playerList.Add(human);
                 }
                 else
                 {
-                    BotPlayer bot = new BotPlayer(deck, numOfPlayers, count, false);
+                    BotPlayer bot = new BotPlayer(deck, numOfPlayers, "BOT"+count, false);
                     playerList.Add(bot);
                 }
             }

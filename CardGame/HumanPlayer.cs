@@ -6,8 +6,8 @@ namespace CardGame
 {
     public class HumanPlayer : Player
     {
-        public HumanPlayer(Deck deck, int numOfPlayers, int iD, bool isWinner) 
-            : base(deck, numOfPlayers, iD, isWinner)
+        public HumanPlayer(Deck deck, int numOfPlayers, string name, bool isWinner) 
+            : base(deck, numOfPlayers, name, isWinner)
         {
         }
 
