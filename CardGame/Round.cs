@@ -10,22 +10,19 @@ namespace CardGame
      
         private List<Player> listOfPlayers;
         public int StarterPlayer { get; set; }
-        private List<Card> _listOfTopCards = new List<Card>();
+        private List<Card> _listOfTopCards;
+        public List<Card> ListOfTopCards = new List<Card>();
 
-        public List<Card> ListOfTopCards
-        {
-            get { return _listOfTopCards; }
-            set { _listOfTopCards = value; }
-        }
         public Round(List<Player> playersList)
         {
             this.listOfPlayers = playersList;
+            ListOfTopCards = new List<Card>();
         }
         public void GetTopCards(List<Player> players)
         {
             foreach (var player in players)
             {
-                ListOfTopCards.Add(player.TopCard);
+                ListOfTopCards.Add(player.GetTopCard());
             }
         }
         public List<Player> GetRankList(List<Player> players)

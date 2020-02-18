@@ -11,7 +11,7 @@ namespace CardGame
         {
         }
 
-        public override int ChooseAttributes(Card topCard, string attribute)
+        public override int ChooseAttributes(string attribute)
         {
             if (attribute.ToLower().Equals("hp"))
             {
@@ -49,7 +49,9 @@ namespace CardGame
 
         public override Card GetTopCard()
         {
-            return this.listOfCards[0];
+            Card cardToRemove = this.listOfCards[0];
+            this.listOfCards.Remove(cardToRemove);
+            return cardToRemove;
         }
     }
 }

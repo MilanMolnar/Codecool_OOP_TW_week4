@@ -9,12 +9,14 @@ namespace CardGame
         static void Main(string[] args)
         {
             //how much player
-            
+
             //how much bot
 
             //PlayerManager.AddPlayers()
 
             //while(true) : round
+
+            //if(!Round.IsNextRound): break
 
             //printing winner
 
@@ -24,7 +26,7 @@ namespace CardGame
 
 
 
-            
+
             /*List<HumanPlayer> playerList = new List<HumanPlayer>();
             var deck = new Deck();
             Console.Write("How many players are in this round: ");
