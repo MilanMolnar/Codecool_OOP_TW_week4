@@ -8,14 +8,14 @@ namespace CardGame
     {
         static void Main(string[] args)
         {
-            List<Player> playerList = new List<Player>();
+            List<HumanPlayer> playerList = new List<HumanPlayer>();
             var deck = new Deck();
             Console.Write("How many players are in this round: ");
             var numOfPlayers = Convert.ToInt32(Console.ReadLine());
 
             for (int i = 0; i < numOfPlayers; i++)
             {
-                playerList.Add(new Player(deck, numOfPlayers));
+                playerList.Add((new HumanPlayer(deck, numOfPlayers));
             }
 
             foreach (var player in playerList)

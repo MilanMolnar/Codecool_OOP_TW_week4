@@ -36,12 +36,13 @@ namespace CardGame
         {
             foreach (var player in players)
             {
-                if (player.listOfCards.Count == 0)
+                if (player.GetCardCount() == 0)
                 {
                     return false;
                 }
+                return true;
             }
-            return true;
+            throw new Exception("NoPlayerException");
         }
     }
 }

@@ -4,14 +4,11 @@ using System.Text;
 
 namespace CardGame
 {
-    class BotPlayer : Player
+    public class HumanPlayer : Player
     {
-        public List<Card> listOfCards;
-        Card TopCard { get; set; }
-        int ID { get; set; }
-        bool isWinner { get; set; }
+       
 
-        public BotPlayer(Deck deck, int numOfPlayers, List<Card> listOfCards, Card topCard, int iD, bool isWinner) 
+        public HumanPlayer(Deck deck, int numOfPlayers, List<Card> listOfCards, Card topCard, int iD, bool isWinner) 
             : base(deck, numOfPlayers, listOfCards, topCard, iD, isWinner)
         {
         }
@@ -47,10 +44,9 @@ namespace CardGame
                 this.listOfCards.Add(card);
             }
         }
-
         public override int GetCardCount()
         {
-            return this.listOfCards.Count;
+            return listOfCards.Count;
         }
     }
 }
