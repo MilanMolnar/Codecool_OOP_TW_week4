@@ -11,7 +11,7 @@ namespace CardGame
         {
         }
 
-        public override int ChooseAttributes(Card topCard, string attribute)
+        public override int ChooseAttributes(string attribute)
         {
             if (attribute.ToLower().Equals("hp"))
             {

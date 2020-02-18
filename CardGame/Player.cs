@@ -15,10 +15,10 @@ namespace CardGame
             this.Name = name;
             this.isWinner = isWinner;
         }
-
+        public Card topCard { get { return listOfCards[0]; } }
         string Name { get; set; }
         bool isWinner { get; set; }
-        abstract public int ChooseAttributes(Card topCard,string attribute);
+        abstract public int ChooseAttributes(string attribute);
         abstract public void TakeCards(List<Card> topCards);
         abstract public int GetCardCount();
         abstract public Card GetTopCard(); 

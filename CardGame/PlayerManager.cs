@@ -23,7 +23,7 @@ namespace CardGame
                 if(count<=numOfPlayers-NumOfBotPlayers)
                 {
                     UserControl userControl = new UserControl();
-                    string name=userConstrol
+                    string name=userControl.
                     HumanPlayer human = new HumanPlayer(deck, numOfPlayers, name, false);
                     playerList.Add(human);
                 }
