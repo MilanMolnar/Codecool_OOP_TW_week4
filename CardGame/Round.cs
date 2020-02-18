@@ -7,34 +7,88 @@ namespace CardGame
 {
     public class Round
     {
-
-        private List<Player> listOfPlayers;
-        public int StarterPlayer { get; set; }
-        private List<Card> _listOfTopCards;
-        public List<Card> ListOfTopCards = new List<Card>();
-
-        public Round(List<Player> playersList)
+        List<Card> currentListOfCards=new List<Card>();
+        string selectedAttribute;
+        Player prevRoundWinner;
+        //playerManager.userControl.
+        List<Player> listOfPlayers;
+        PlayerManager playerManager;
+        public Round(PlayerManager playerManager)
         {
-            PlayerManager playerManager = new PlayerManager();
-            playerManager
-            this.listOfPlayers =
+            this.playerManager = playerManager;
+            listOfPlayers = playerManager.GetPlayers();
+            this.prevRoundWinner = playerManager.PrevRoundWinner;
+            this.selectedAttribute = playerManager.userControl.ChooseAttribute(prevRoundWinner);
         }
+
         public void GetTopCards(List<Player> players)
         {
+            
             foreach (var player in players)
             {
-                ListOfTopCards.Add(player.GetTopCard());
+                currentListOfCards.Add(player.GetTopCard());
             }
         }
-        public List<Player> GetRankList(List<Player> players)
-        {
 
-            IEnumerable<Player> ordered = players.OrderByDescending(player => player.GetCardCount());
-            return ordered.ToList();
-        }
-        public bool IsNextRound(List<Player> players)
+        
+        public void Compare()
         {
-            foreach (var player in players)
+            currentListOfCards=playerManager.SortByAttribute(selectedAttribute, currentListOfCards);
+        }
+
+        public bool IsDraw()
+        {
+            if(selectedAttribute.Equals("hp"))
+            {
+                if(currentListOfCards[currentListOfCards.Count-1].HP==
+                    currentListOfCards[currentListOfCards.Count-2].HP)
+                {
+                    return true;
+                }
+            }
+            else if (selectedAttribute.Equals("attack"))
+            {
+                if (currentListOfCards[currentListOfCards.Count - 1].Attack == 
+                    currentListOfCards[currentListOfCards.Count - 2].Attack)
+                {
+                    return true;
+                }
+            }
+            else if (selectedAttribute.Equals("defend"))
+            {
+                if (currentListOfCards[currentListOfCards.Count - 1].Defend ==
+                    currentListOfCards[currentListOfCards.Count - 2].Defend)
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                if (currentListOfCards[currentListOfCards.Count - 1].Speed ==
+                    currentListOfCards[currentListOfCards.Count - 2].Speed)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+
+        public Player SearchWinner()
+        {
+            foreach(var player in listOfPlayers)
+            {
+                if(player.listOfCards.Contains(currentListOfCards[currentListOfCards.Count-1]))
+                {
+                    return player;
+                }
+            }
+            throw new Exception("NotValidSearch");
+        }
+       
+        public bool IsNextRound()
+        {
+            foreach (var player in listOfPlayers)
             {
                 if (player.GetCardCount() == 0)
                 {
@@ -44,5 +98,10 @@ namespace CardGame
             }
             throw new Exception("NoPlayerException");
         }
+
+        //winner choosing attribute
+        //choose the winner (if draw do an another round)
+        //then empty the table
+
     }
 }

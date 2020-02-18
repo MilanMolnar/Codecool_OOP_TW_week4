@@ -8,19 +8,18 @@ namespace CardGame
     {
 
         public List<Card> listOfCards;
-
-        protected Player(Deck deck,int numOfPlayer, string name, bool isWinner)
+        public string SelectedAttribute { get; set; }
+        public Card topCard { get { return listOfCards[0]; } }
+        public string Name { get; set; }
+        protected Player(Deck deck, int numOfPlayer, string name)
         {
             this.listOfCards = deck.DealCards(numOfPlayer);
-            this.Name = name;
-            this.isWinner = isWinner;
+            this.Name = name;;
         }
-        public Card topCard { get { return listOfCards[0]; } }
-        string Name { get; set; }
-        bool isWinner { get; set; }
-        abstract public int ChooseAttributes(string attribute);
+
         abstract public void TakeCards(List<Card> topCards);
         abstract public int GetCardCount();
-        abstract public Card GetTopCard(); 
+        abstract public Card GetTopCard();
+        abstract public void RemoveCard(Card card);
     }
 }

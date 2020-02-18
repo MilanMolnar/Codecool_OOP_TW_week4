@@ -13,8 +13,12 @@ namespace CardGame
             //how much bot
 
             //PlayerManager.AddPlayers()
-
+            Deck deck = new Deck();
+            PlayerManager playerManager = new PlayerManager();
+            Round round = new Round(playerManager);
+           
             //while(true) : round
+
 
             //if(!Round.IsNextRound): break
 

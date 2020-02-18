@@ -6,36 +6,11 @@ namespace CardGame
 {
     public class HumanPlayer : Player
     {
-        public HumanPlayer(Deck deck, int numOfPlayers, string name, bool isWinner) 
-            : base(deck, numOfPlayers, name, isWinner)
+        public HumanPlayer(Deck deck, int numOfPlayers, string name) 
+            : base(deck, numOfPlayers, name)
         {
         }
-
-        public override int ChooseAttributes(string attribute)
-        {
-            if (attribute.ToLower().Equals("hp"))
-            {
-                return topCard.HP;
-            }
-            else if (attribute.ToLower().Equals("attack"))
-            {
-                return topCard.Attack;
-            }
-            else if (attribute.ToLower().Equals("defend"))
-            {
-                return topCard.Defend;
-            }
-            else if (attribute.ToLower().Equals("speed"))
-            {
-                return topCard.Speed;
-            }
-            else
-            {
-                throw new Exception("NotValidAttribute");
-            }
-        }
-
-        public override void TakeCards(List<Card> topCards)
+        public override void TakeCards(List<Card> topCards) //if he/she wins
         {
             foreach (var card in topCards)
             {
@@ -49,9 +24,12 @@ namespace CardGame
 
         public override Card GetTopCard()
         {
-            Card cardToRemove = this.listOfCards[0];
-            this.listOfCards.Remove(cardToRemove);
-            return cardToRemove;
+            return this.topCard;
+        }
+
+        public override void RemoveCard(Card card)
+        {
+            listOfCards.Remove(GetTopCard());
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CardGame
 {
-    class UserControl
+   public class UserControl
     {
         public void PrintPlayers(List<Player> players)
         {
@@ -57,18 +57,27 @@ namespace CardGame
             int numOfBotPlayers = Convert.ToInt32(Console.ReadLine());
             return numOfBotPlayers;
         }
-        public string ChooseAttributePrompt(Card topCard)
+        public string ChooseAttribute(Player player)
         {
-            PrintCardWithAttributes(topCard);
-            Console.WriteLine();
-            Console.Write("Decide which attribute you want to fight with: ");
-            return Console.ReadLine();
+            if(player is HumanPlayer)
+            { 
+                PrintCardWithAttributes(player.topCard);
+                Console.WriteLine();
+                Console.Write("Decide which attribute you want to fight with: ");
+                return Console.ReadLine();
+            }
+            else
+            {
+                Random rand = new Random();
+                string[] attributes = new string[] { "hp", "attack", "defend", "speed" };
+                return attributes[rand.Next(0, 4)];
+            }
         }
         public void PrintWinner(Player winner)
         {
             Console.WriteLine($"The winner is {winner.Name}!");
         }
-        public string GetAllNames(Player player)
+        public string GetName()
         {
             Console.Write("What is your names: ");
             return Console.ReadLine();
