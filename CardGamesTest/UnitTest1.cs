@@ -10,22 +10,22 @@ namespace CardGamesTest
         public void RoundGetRankListTest()
         {
             Deck d = new Deck();
-            Player p1 = new Player(d, 2);
+            HumanPlayer p1 = new HumanPlayer(d, 2);
             Deck d2 = new Deck();
-            Player p2 = new Player(d2, 1);
+            HumanPlayer p2 = new HumanPlayer(d2, 1);
             Deck d3 = new Deck();
-            Player p3 = new Player(d3, 3);
+            HumanPlayer p3 = new HumanPlayer(d3, 3);
             Deck d4 = new Deck();
-            Player p4 = new Player(d4, 4);
+            HumanPlayer p4 = new HumanPlayer(d4, 4);
 
-            List<Player> l = new List<Player>();
+            List<HumanPlayer> l = new List<HumanPlayer>();
             l.Add(p2);
             l.Add(p4);
             l.Add(p1);
             l.Add(p3);
 
             Round r = new Round(l);
-            List<Player> result=r.GetRankList(l);
+            List<HumanPlayer> result=r.GetRankList(l);
 
             Assert.AreEqual(result[0], p2);
         }
