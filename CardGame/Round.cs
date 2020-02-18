@@ -7,11 +7,8 @@ namespace CardGame
 {
     public class Round
     {
-        public Round(List<Player> listOfPlayers)
-        {
-            this.listOfPlayers = listOfPlayers;
-        }
-        private List<Player> listOfPlayers = new List<Player>();
+     
+        private List<Player> listOfPlayers;
         public int StarterPlayer { get; set; }
         private List<Card> _listOfTopCards = new List<Card>();
 
@@ -19,6 +16,12 @@ namespace CardGame
         {
             get { return _listOfTopCards; }
             set { _listOfTopCards = value; }
+        }
+        public Round()
+        {
+            PlayerManager playerManager = new PlayerManager();
+            playerManager
+            this.listOfPlayers = 
         }
         public void GetTopCards(List<Player> players)
         {

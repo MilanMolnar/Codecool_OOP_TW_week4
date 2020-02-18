@@ -29,8 +29,7 @@ namespace CardGame
         {
             if (numOfPlayers > allCards.Count)
             {
-                throw new Exception();
-                //throw new NotEnoughCardException();
+                throw new Exception("NotEnoughCardException");
             }
             var result = new List<Card>();
 

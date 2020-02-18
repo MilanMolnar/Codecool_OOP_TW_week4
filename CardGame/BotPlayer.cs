@@ -4,15 +4,10 @@ using System.Text;
 
 namespace CardGame
 {
-    class BotPlayer : Player
+    public class BotPlayer : Player
     {
-        public List<Card> listOfCards;
-        Card TopCard { get; set; }
-        int ID { get; set; }
-        bool isWinner { get; set; }
-
-        public BotPlayer(Deck deck, int numOfPlayers, List<Card> listOfCards, Card topCard, int iD, bool isWinner) 
-            : base(deck, numOfPlayers, listOfCards, topCard, iD, isWinner)
+        public BotPlayer(Deck deck, int numOfPlayers, int iD, bool isWinner) 
+            : base(deck, numOfPlayers,iD, isWinner)
         {
         }
 
@@ -51,6 +46,11 @@ namespace CardGame
         public override int GetCardCount()
         {
             return this.listOfCards.Count;
+        }
+
+        public override Card GetTopCard()
+        {
+            return this.listOfCards[0];
         }
     }
 }

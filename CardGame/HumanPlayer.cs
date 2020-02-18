@@ -6,10 +6,8 @@ namespace CardGame
 {
     public class HumanPlayer : Player
     {
-       
-
-        public HumanPlayer(Deck deck, int numOfPlayers, List<Card> listOfCards, Card topCard, int iD, bool isWinner) 
-            : base(deck, numOfPlayers, listOfCards, topCard, iD, isWinner)
+        public HumanPlayer(Deck deck, int numOfPlayers, int iD, bool isWinner) 
+            : base(deck, numOfPlayers, iD, isWinner)
         {
         }
 
@@ -47,6 +45,11 @@ namespace CardGame
         public override int GetCardCount()
         {
             return listOfCards.Count;
+        }
+
+        public override Card GetTopCard()
+        {
+            return this.listOfCards[0];
         }
     }
 }
