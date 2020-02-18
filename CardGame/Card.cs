@@ -10,13 +10,15 @@ namespace CardGame
         public int Attack { get; }
         public int Defend { get; }
         public int Speed { get; }
+        public string Name { get; }
 
-        public Card(int hp, int attack, int defend, int speed)
+        public Card(int hp, int attack, int defend, int speed, string name)
         {
             HP = hp;
             Attack = attack;
             Defend = defend;
             Speed = speed;
+            Name = name;
         }
     }
 }
