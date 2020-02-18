@@ -21,7 +21,7 @@ namespace CardGame
             {
                 if (player.Name == name)
                 {
-                    Console.WriteLine($"Player's ({player.Name}) top card: {player.listOfCards[0]}");
+                    Console.WriteLine($"Player's ({player.Name}) top card: {player.topCard}");
                 }
                 else
                 {
@@ -67,6 +67,11 @@ namespace CardGame
         public void PrintWinner(Player winner)
         {
             Console.WriteLine($"The winner is {winner.Name}!");
+        }
+        public string GetAllNames(Player player)
+        {
+            Console.Write("What is your names: ");
+            return Console.ReadLine();
         }
     }
 }
