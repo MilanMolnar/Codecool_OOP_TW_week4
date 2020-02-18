@@ -17,11 +17,9 @@ namespace CardGame
             get { return _listOfTopCards; }
             set { _listOfTopCards = value; }
         }
-        public Round()
+        public Round(List<Player> playersList)
         {
-            PlayerManager playerManager = new PlayerManager();
-            playerManager
-            this.listOfPlayers = 
+            this.listOfPlayers = playersList;
         }
         public void GetTopCards(List<Player> players)
         {
