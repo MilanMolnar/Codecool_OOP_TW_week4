@@ -1,54 +1,63 @@
 ﻿<?xml version="1.0"?>
 <Cards>
     <Card>
+        <Name>GreyBreard</Name>
         <HP>100</HP>
         <Atk>123</Atk>
         <Def>312</Def>
         <Speed>12</Speed>
     </Card>
     <Card>
+        <Name>GreyBreard2</Name>
         <HP>122</HP>
         <Atk>321</Atk>
         <Def>123</Def>
         <Speed>321</Speed>
     </Card>
     <Card>
+        <Name>GreyBreard3</Name>
         <HP>234</HP>
         <Atk>412</Atk>
         <Def>312</Def>
         <Speed>421</Speed>
     </Card>
     <Card>
+        <Name>GreyBreard4</Name>
         <HP>123</HP>
         <Atk>423</Atk>
         <Def>132</Def>
         <Speed>342</Speed>
     </Card>
     <Card>
+        <Name>GreyBreard5</Name>
         <HP>523</HP>
         <Atk>234</Atk>
         <Def>223</Def>
         <Speed>234</Speed>
     </Card>
     <Card>
+        <Name>GreyBreard6</Name>
         <HP>423</HP>
         <Atk>523</Atk>
         <Def>12</Def>
         <Speed>31</Speed>
     </Card>
     <Card>
+        <Name>GreyBreard7</Name>
         <HP>123</HP>
         <Atk>712</Atk>
         <Def>1</Def>
         <Speed>21</Speed>
     </Card>
     <Card>
+        <Name>GreyBreard8</Name>
         <HP>21</HP>
         <Atk>12</Atk>
         <Def>999</Def>
         <Speed>123</Speed>
     </Card>
     <Card>
+        <Name>GreyBreard9</Name>
         <HP>123</HP>
         <Atk>32</Atk>
         <Def>423</Def>
