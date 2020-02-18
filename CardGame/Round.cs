@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace CardGame
 {
-    class Round
+    public class Round
     {
         public Round(List<Player> listOfPlayers)
         {
@@ -29,7 +29,7 @@ namespace CardGame
         }
         public List<Player> GetRankList(List<Player> players)
         {
-            IEnumerable<Player> ordered = players.OrderBy(player => player.GetCardCount());
+            IEnumerable<Player> ordered = players.OrderByDescending(player => player.GetCardCount());
             return ordered.ToList();
         }
         public bool IsNextRound(List<Player> players)

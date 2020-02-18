@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CardGame
 {
-    class Player : IPlayer
+    public class Player : IPlayer
     {
         public List<Card> listOfCards;
         public Card TopCard { get; set; }

@@ -6,14 +6,15 @@ using System.Text;
 
 namespace CardGame
 {
-    class Deck
+    public class Deck
     {
         public List<Card> allCards { get; private set; }
         private int numOfAllCards;
 
         public Deck()
         {
-            string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/CardGame/Cards.xml");
+            string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+                + "/CardGame/Cards.xml");
             allCards = new XmlLoader().LoadCards(path);
             numOfAllCards = allCards.Count();
             Shuffle();

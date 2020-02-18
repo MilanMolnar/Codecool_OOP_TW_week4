@@ -6,7 +6,6 @@ namespace CardGame
 {
     interface IDocumentLoader
     {
-        
-        public List<Card> LoadCards(string path);
+        List<Card> LoadCards(string path);
     }
 }

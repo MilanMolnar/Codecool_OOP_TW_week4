@@ -23,7 +23,11 @@ namespace CardGame
                 Console.Write(player + ": ");
                 foreach (var card in player.listOfCards)
                 {
-                    Console.WriteLine(card.Attack);
+                    Console.WriteLine("Attack: "+card.Attack);
+                    Console.WriteLine("Hp: "+card.HP);
+                    Console.WriteLine("Def: "+card.Defend);
+                    Console.WriteLine("Speed: "+card.Speed);
+                    Console.WriteLine();
                 }
             }
         }
