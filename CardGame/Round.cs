@@ -7,7 +7,7 @@ namespace CardGame
 {
     public class Round
     {
-     
+
         private List<Player> listOfPlayers;
         public int StarterPlayer { get; set; }
         private List<Card> _listOfTopCards;
@@ -15,8 +15,9 @@ namespace CardGame
 
         public Round(List<Player> playersList)
         {
-            this.listOfPlayers = playersList;
-            ListOfTopCards = new List<Card>();
+            PlayerManager playerManager = new PlayerManager();
+            playerManager
+            this.listOfPlayers =
         }
         public void GetTopCards(List<Player> players)
         {
@@ -27,6 +28,7 @@ namespace CardGame
         }
         public List<Player> GetRankList(List<Player> players)
         {
+
             IEnumerable<Player> ordered = players.OrderByDescending(player => player.GetCardCount());
             return ordered.ToList();
         }
