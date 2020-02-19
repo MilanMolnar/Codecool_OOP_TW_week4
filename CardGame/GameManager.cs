@@ -28,6 +28,10 @@ namespace CardGame
                 if (count < NumOfPlayers - NumOfBotPlayers)
                 {
                     string name = userControl.GetName();
+                    if(name.Equals(null))
+                    {
+                        throw new Exception("NullNameException");
+                    }
                     HumanPlayer human = new HumanPlayer(deck, NumOfPlayers, name);
                     playerList.Add(human);
                 }
