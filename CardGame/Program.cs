@@ -8,12 +8,45 @@ namespace CardGame
     {
         static void Main(string[] args)
         {
-
             Deck deck = new Deck();
             var cmp = new CardComparer.SortByNumOfCards();
             var usr = new UserControl();
             var table = new Table();
-            var gm = new GameManager(usr.AskPlayersForNumOfPlayer(), usr.AskForBotPlayers(), deck);
+
+            int numberOfPlayers;
+            int numberOfBots;
+            GameManager gm;
+            while (true)
+            {
+                try
+                {
+                    numberOfPlayers = usr.AskPlayersForNumOfPlayer();
+                    break;
+                }
+                catch (NotValidPlayerException)
+                {
+                    usr.Error("Players number must be 2 or greater!\n\n");
+                }
+            }
+
+            while(true)
+            { 
+                try
+                {
+                    numberOfBots = usr.AskForBotPlayers(numberOfPlayers);
+                    break;
+                }
+                catch (NotValidBotException)
+                {
+                    usr.Error("Bots number are greater than playable slots!\n\n");
+                }
+            }
+
+           
+            deck = new Deck();
+            gm = new GameManager(numberOfPlayers, numberOfBots, deck);
+           
+
             usr.PrintStarterInformation();
             while (true)
             {
@@ -29,38 +62,19 @@ namespace CardGame
                         break;
                     }
                 }
-                catch(Exception e)
+                catch(NullNameException)
                 {
-                    usr.Error("Invalid input!");
+                    usr.Error("Name not found!");
                 }
-            }
-
-            var result = gm.GetPlayers();
-            result.Sort(cmp);
-            usr.PrintPlayersByRanks(result);
-
-            //while(true) : round
-
-
-            //if(!Round.IsNextRound): break
-
-            //printing winner
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                catch (NotEnoughCardException)
+                {
+                    usr.Error("Not enough cards for players!\n\n");
+                }
+                catch (WrongAttributeException)
+                {
+                    usr.Error("Wrong attribute!\n\n");
+                }
+            }                
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
+using ConsoleTables;
 
 namespace CardGame
 {
@@ -89,22 +90,42 @@ namespace CardGame
         }
         public int AskPlayersForNumOfPlayer()
         {
-            Info("Number must be lesser than the number of players");
+            Info("Number must be a positive whole number");
             Input("How many players wants to play: ");
-            int numOfPlayer = Convert.ToInt32(Console.ReadLine());
-            if (numOfPlayer < 2)
+
+            int numOfPlayer;
+            if (int.TryParse(Console.ReadLine(),out numOfPlayer))
             {
-                throw new Exception("");
+                if (numOfPlayer < 2)
+                {
+                    throw new NotValidPlayerException();
+                }
+                return numOfPlayer;
             }
-            return numOfPlayer;
+            else
+            {
+                throw new NotValidPlayerException();
+            }
         }
-        public int AskForBotPlayers()
+        public int AskForBotPlayers(int numberOfPlayers)
         {
             Console.WriteLine();
             Info("Must be lower than the number of players!");
             Input("How many of the players you want to be bot: ");
-            int numOfBotPlayers = Convert.ToInt32(Console.ReadLine());
-            return numOfBotPlayers;
+
+            int numOfBotPlayers;
+            if (int.TryParse(Console.ReadLine(),out numOfBotPlayers))
+            {
+                if (numOfBotPlayers > numberOfPlayers)
+                {
+                    throw new NotValidBotException();
+                }
+                return numOfBotPlayers;
+            }
+            else
+            {
+                throw new NotValidBotException();
+            }
         }
         public string ChooseAttribute(Player player)
         {
@@ -113,7 +134,7 @@ namespace CardGame
             {
                 PrintCardWithAttributes(player.topCard);
                 Console.WriteLine();
-                Console.Write($"Decide which attribute you want to fight with [hp/attack/defend/speed]: p");
+                Console.Write($"Decide which attribute you want to fight with [hp/attack/defend/speed]: ");
                 return Console.ReadLine();
             }
             else
@@ -132,12 +153,22 @@ namespace CardGame
             Input("What is your name: ");
             return Console.ReadLine();
         }
+
         public void PrintStarterInformation()
         {
             Info("Shuffeling cards...");
             Thread.Sleep(500);
             Info("Dealing cards to players...");
             Thread.Sleep(500);
+        }
+        public void DisplayDeck(List<Card> deck)
+        {
+            var ct = new ConsoleTable("CARDNAME", "HEALTH", "ATTACK", "DEFENSE", "SPEED");
+            foreach (var card in deck)
+            {
+                ct.AddRow(card.Name,card.HP,card.Attack,card.Defend,card.Speed);
+            }
+            ct.Write();
         }
     }
 }

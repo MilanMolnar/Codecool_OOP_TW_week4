@@ -29,7 +29,7 @@ namespace CardGame
         {
             if (numOfPlayers > numOfAllCards)
             {
-                throw new Exception("NotEnoughCardException");
+                throw new NotEnoughCardException();
             }
             var result = new List<Card>();
 

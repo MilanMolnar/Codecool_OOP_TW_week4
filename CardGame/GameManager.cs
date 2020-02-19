@@ -13,13 +13,19 @@ namespace CardGame
         public UserControl userControl = new UserControl();
         public Player PrevRoundWinner { get; set; }
         public List<Card> currentListOfCards;
-        public GameManager(int numOfPlayers, int NumOfBotPlayers, Deck deck)
+        public GameManager() { }
+        public GameManager(int numOfPlayers, int NumOfBotPlayers)
         {
             this.NumOfPlayers = numOfPlayers;
             this.NumOfBotPlayers = NumOfBotPlayers;
-            this.deck = deck;
+            this.deck = new Deck();
             AddPlayers();
             GetTopCards();
+        }
+        public List<Card> GetCards()
+        {
+            Deck deck = new Deck();
+            return deck.allCards;
         }
         public void AddPlayers()
         {
@@ -28,6 +34,10 @@ namespace CardGame
                 if (count < NumOfPlayers - NumOfBotPlayers)
                 {
                     string name = userControl.GetName();
+                    if(name.Equals(""))
+                    {
+                        name = "Player" + count;
+                    }
                     HumanPlayer human = new HumanPlayer(deck, NumOfPlayers, name);
                     playerList.Add(human);
                 }
@@ -66,7 +76,7 @@ namespace CardGame
             }
             else
             {
-                throw new Exception("WrongAttributeAdded");
+                throw new WrongAttributeException();
             }
 
             listOfTopCards.Sort(comparer);
@@ -93,13 +103,12 @@ namespace CardGame
         {
             foreach (var player in playerList)
             {
-                Console.WriteLine($"Jatekos kartyaja: {player.topCard.Name} legmagasabb lap:{card.Name}");
                 if (player.topCard.Equals(card))
                 {
                     return player;
                 }
             }
-            throw new Exception("Not valid search");
+            throw new NullNameException();
         }
         public void GetTopCards()
         {

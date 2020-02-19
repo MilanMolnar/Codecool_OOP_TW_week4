@@ -1,57 +1,242 @@
 ﻿<?xml version="1.0"?>
 <Cards>
     <Card>
-        <HP>100</HP>
+        <Name>Axe</Name>
+        <HP>1300</HP>
         <Atk>123</Atk>
-        <Def>312</Def>
-        <Speed>12</Speed>
+        <Def>140</Def>
+        <Speed>120</Speed>
     </Card>
     <Card>
-        <HP>122</HP>
+        <Name>AntiMage</Name>
+        <HP>1000</HP>
         <Atk>321</Atk>
-        <Def>123</Def>
-        <Speed>321</Speed>
+        <Def>50</Def>
+        <Speed>140</Speed>
     </Card>
     <Card>
-        <HP>234</HP>
-        <Atk>412</Atk>
-        <Def>312</Def>
-        <Speed>421</Speed>
+        <Name>Pudge</Name>
+        <HP>1700</HP>
+        <Atk>110</Atk>
+        <Def>100</Def>
+        <Speed>90</Speed>
     </Card>
     <Card>
-        <HP>123</HP>
-        <Atk>423</Atk>
-        <Def>132</Def>
-        <Speed>342</Speed>
+        <Name>Mirana</Name>
+        <HP>1050</HP>
+        <Atk>160</Atk>
+        <Def>47</Def>
+        <Speed>125</Speed>
     </Card>
     <Card>
-        <HP>523</HP>
+        <Name>Meepo</Name>
+        <HP>1700</HP>
         <Atk>234</Atk>
-        <Def>223</Def>
-        <Speed>234</Speed>
+        <Def>95</Def>
+        <Speed>98</Speed>
     </Card>
     <Card>
-        <HP>423</HP>
-        <Atk>523</Atk>
-        <Def>12</Def>
-        <Speed>31</Speed>
+        <Name>Nyx</Name>
+        <HP>1250</HP>
+        <Atk>140</Atk>
+        <Def>75</Def>
+        <Speed>150</Speed>
     </Card>
     <Card>
-        <HP>123</HP>
-        <Atk>712</Atk>
-        <Def>1</Def>
-        <Speed>21</Speed>
+        <Name>MonkeyKing</Name>
+        <HP>970</HP>
+        <Atk>250</Atk>
+        <Def>100</Def>
+        <Speed>100</Speed>
     </Card>
     <Card>
-        <HP>21</HP>
-        <Atk>12</Atk>
-        <Def>999</Def>
+        <Name>LegionCommander</Name>
+        <HP>1300</HP>
+        <Atk>240</Atk>
+        <Def>140</Def>
         <Speed>123</Speed>
     </Card>
     <Card>
-        <HP>123</HP>
+        <Name>Enchantress</Name>
+        <HP>900</HP>
+        <Atk>160</Atk>
+        <Def>85</Def>
+        <Speed>95</Speed>
+    </Card>
+	<Card>
+        <Name>Slardar</Name>
+        <HP>1500</HP>
+        <Atk>140</Atk>
+        <Def>140</Def>
+        <Speed>165</Speed>
+    </Card>
+    <Card>
+        <Name>DrowRanger</Name>
+        <HP>950</HP>
+        <Atk>321</Atk>
+        <Def>55</Def>
+        <Speed>120</Speed>
+    </Card>
+    <Card>
+        <Name>Bloodseeker</Name>
+        <HP>1250</HP>
+        <Atk>200</Atk>
+        <Def>90</Def>
+        <Speed>421</Speed>
+    </Card>
+    <Card>
+        <Name>Morphling</Name>
+        <HP>1800</HP>
+        <Atk>275</Atk>
+        <Def>67</Def>
+        <Speed>120</Speed>
+    </Card>
+    <Card>
+        <Name>Kunkka</Name>
+        <HP>1550</HP>
+        <Atk>180</Atk>
+        <Def>95</Def>
+        <Speed>140</Speed>
+    </Card>
+    <Card>
+        <Name>Timbersaw</Name>
+        <HP>2000</HP>
+        <Atk>110</Atk>
+        <Def>198</Def>
+        <Speed>95</Speed>
+    </Card>
+    <Card>
+        <Name>BountyHunter</Name>
+        <HP>1200</HP>
+        <Atk>145</Atk>
+        <Def>76</Def>
+        <Speed>135</Speed>
+    </Card>
+    <Card>
+        <Name>Razor</Name>
+        <HP>1330</HP>
+        <Atk>175</Atk>
+        <Def>95</Def>
+        <Speed>210</Speed>
+    </Card>
+    <Card>
+        <Name>Huskar</Name>
+        <HP>1770</HP>
+        <Atk>210</Atk>
+        <Def>124</Def>
+        <Speed>115</Speed>
+    </Card>
+	<Card>
+        <Name>Zeus</Name>
+        <HP>1000</HP>
+        <Atk>75</Atk>
+        <Def>75</Def>
+        <Speed>130</Speed>
+    </Card>
+    <Card>
+        <Name>Tinker</Name>
+        <HP>1150</HP>
+        <Atk>140</Atk>
+        <Def>56</Def>
+        <Speed>120</Speed>
+    </Card>
+    <Card>
+        <Name>Magnus</Name>
+        <HP>1650</HP>
+        <Atk>154</Atk>
+        <Def>100</Def>
+        <Speed>145</Speed>
+    </Card>
+    <Card>
+        <Name>Naix</Name>
+        <HP>2150</HP>
+        <Atk>210</Atk>
+        <Def>165</Def>
+        <Speed>120</Speed>
+    </Card>
+    <Card>
+        <Name>PhantomLancer</Name>
+        <HP>1400</HP>
+        <Atk>260</Atk>
+        <Def>120</Def>
+        <Speed>145</Speed>
+    </Card>
+    <Card>
+        <Name>Ursa</Name>
+        <HP>1750</HP>
+        <Atk>212</Atk>
+        <Def>145</Def>
+        <Speed>134</Speed>
+    </Card>
+    <Card>
+        <Name>ShadowFiend</Name>
+        <HP>1400</HP>
+        <Atk>255</Atk>
+        <Def>76</Def>
+        <Speed>132</Speed>
+    </Card>
+    <Card>
+        <Name>Viper</Name>
+        <HP>1770</HP>
+        <Atk>187</Atk>
+        <Def>112</Def>
+        <Speed>113</Speed>
+    </Card>
+    <Card>
+        <Name>TreantProtector</Name>
+        <HP>100</HP>
         <Atk>32</Atk>
         <Def>423</Def>
         <Speed>432</Speed>
     </Card>
+	<Card>
+        <Name>Slark</Name>
+        <HP>1440</HP>
+        <Atk>205</Atk>
+        <Def>145</Def>
+        <Speed>132</Speed>
+    </Card>
+    <Card>
+        <Name>SandKing</Name>
+        <HP>1660</HP>
+        <Atk>150</Atk>
+        <Def>125</Def>
+        <Speed>132</Speed>
+    </Card>
+    <Card>
+        <Name>Sniper</Name>
+        <HP>1200</HP>
+        <Atk>245</Atk>
+        <Def>120</Def>
+        <Speed>145</Speed>
+    </Card>
+    <Card>
+        <Name>Enigma</Name>
+        <HP>1220</HP>
+        <Atk>110</Atk>
+        <Def>67</Def>
+        <Speed>105</Speed>
+    </Card>
+    <Card>
+        <Name>Balanar</Name>
+        <HP>2010</HP>
+        <Atk>185</Atk>
+        <Def>156</Def>
+        <Speed>204</Speed>
+    </Card>
+	<Card>
+        <Name>Gyrocopter</Name>
+        <HP>1530</HP>
+        <Atk>170</Atk>
+        <Def>86</Def>
+        <Speed>143</Speed>
+    </Card>
+    <Card>
+        <Name>Doom</Name>
+        <HP>2210</HP>
+        <Atk>182</Atk>
+        <Def>75</Def>
+        <Speed>105</Speed>
+    </Card>
+
 </Cards>
