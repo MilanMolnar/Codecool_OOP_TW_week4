@@ -18,7 +18,6 @@ namespace CardGame
             this.NumOfPlayers = numOfPlayers;
             this.NumOfBotPlayers = NumOfBotPlayers;
             this.deck = deck;
-            currentListOfCards = new List<Card>();
             AddPlayers();
             GetTopCards();
         }
@@ -87,9 +86,9 @@ namespace CardGame
         {
             foreach (var player in playerList)
             {
+                Console.WriteLine($"Jatekos kartyaja: {player.topCard.Name} legmagasabb lap:{card.Name}");
                 if (player.topCard.Equals(card))
                 {
-                    Console.WriteLine($"Jatekos kartyaja: {player.topCard.Name} legmagasabb lap:{card.Name}");
                     return player;
                 }
             }
@@ -97,6 +96,7 @@ namespace CardGame
         }
         public void GetTopCards()
         {
+            currentListOfCards = new List<Card>();
             foreach (var player in playerList)
             {
                 currentListOfCards.Add(player.GetTopCard());

@@ -27,7 +27,7 @@ namespace CardGame
         }
         public List<Card> DealCards(int numOfPlayers)
         {
-            if (numOfPlayers > allCards.Count)
+            if (numOfPlayers > numOfAllCards)
             {
                 throw new Exception("NotEnoughCardException");
             }
