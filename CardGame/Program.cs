@@ -8,7 +8,7 @@ namespace CardGame
     {
         static void Main(string[] args)
         {
-            Deck deck;
+            Deck deck = new Deck();
             var cmp = new CardComparer.SortByNumOfCards();
             var usr = new UserControl();
             var table = new Table();
