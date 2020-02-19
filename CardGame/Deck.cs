@@ -16,7 +16,7 @@ namespace CardGame
             string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
                 + "/CardGame/Cards.xml");
             allCards = new XmlLoader().LoadCards(path);
-            numOfAllCards = allCards.Count();
+            this.numOfAllCards = allCards.Count;
             Shuffle();
         }
 
@@ -33,7 +33,7 @@ namespace CardGame
             }
             var result = new List<Card>();
 
-            for (int i = 0; i < numOfAllCards / numOfPlayers; i++)
+            for (int i = 0; i < numOfCardsToDeal; i++)
             {
                 result.Add(allCards[i]);
             }
