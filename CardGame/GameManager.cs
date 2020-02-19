@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CardGame
 {
-    public class PlayerManager
+    public class GameManager
     {
         List<Player> playerList = new List<Player>();
         int NumOfPlayers { get; set; }
@@ -13,7 +13,7 @@ namespace CardGame
         public UserControl userControl = new UserControl();
         public Player PrevRoundWinner { get; set; }
         public List<Card> currentListOfCards;
-        public PlayerManager(int numOfPlayers, int NumOfBotPlayers, Deck deck)
+        public GameManager(int numOfPlayers, int NumOfBotPlayers, Deck deck)
         {
             this.NumOfPlayers = numOfPlayers;
             this.NumOfBotPlayers = NumOfBotPlayers;
@@ -34,7 +34,7 @@ namespace CardGame
                 else
                 {
                     BotPlayer bot = new BotPlayer(deck, NumOfPlayers,
-                        "BOT" + (count - (NumOfPlayers - NumOfBotPlayers)));
+                        "BOT" + (count - (NumOfPlayers - NumOfBotPlayers) + 1));
                     playerList.Add(bot);
                 }
             }
@@ -60,10 +60,15 @@ namespace CardGame
             {
                 comparer = new CardComparer.DefendComparer();
             }
-            else
+            else if(attribute.ToLower().Equals("speed"))
             {
                 comparer = new CardComparer.SpeedComparer();
             }
+            else
+            {
+                throw new Exception("WrongAttributeAdded");
+            }
+
             listOfTopCards.Sort(comparer);
 
             if (comparer.Compare(listOfTopCards[0], listOfTopCards[1]) == 0)
