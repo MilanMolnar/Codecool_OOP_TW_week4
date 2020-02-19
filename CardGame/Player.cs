@@ -20,6 +20,6 @@ namespace CardGame
         abstract public void TakeCards(List<Card> topCards);
         abstract public int GetCardCount();
         abstract public Card GetTopCard();
-        abstract public void RemoveCard(Card card);
+        abstract public void RemoveCard();
     }
 }

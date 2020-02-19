@@ -14,8 +14,14 @@ namespace CardGame
 
             //PlayerManager.AddPlayers()
             Deck deck = new Deck();
-            PlayerManager playerManager = new PlayerManager();
-            Round round = new Round(playerManager);
+            GameManager playerManager = new GameManager(1,1,deck);
+            playerManager.AddPlayers(1, 1, deck);
+            
+            playerManager.StartNewRound();
+            playerManager.Compare();
+
+            
+
            
             //while(true) : round
 

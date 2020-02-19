@@ -25,7 +25,7 @@ namespace CardGame
                 }
                 else
                 {
-                    Console.WriteLine("There is no naem that corresponds to the input");
+                    Console.WriteLine("There is no name that corresponds to the input");
                 }
             }
         }

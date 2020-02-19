@@ -12,8 +12,8 @@ namespace CardGame
         Player prevRoundWinner;
         //playerManager.userControl.
         List<Player> listOfPlayers;
-        PlayerManager playerManager;
-        public Round(PlayerManager playerManager)
+        GameManager playerManager;
+        public Round(GameManager playerManager)
         {
             this.playerManager = playerManager;
             listOfPlayers = playerManager.GetPlayers();

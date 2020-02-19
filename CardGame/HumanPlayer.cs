@@ -27,7 +27,7 @@ namespace CardGame
             return this.topCard;
         }
 
-        public override void RemoveCard(Card card)
+        public override void RemoveCard()
         {
             listOfCards.Remove(GetTopCard());
         }
