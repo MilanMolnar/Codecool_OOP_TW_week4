@@ -79,7 +79,9 @@ namespace CardGame
             }
             foreach (var player in playerList)
             {
+
                 player.RemoveCard();
+                Console.WriteLine($"{player.Name}: {player.listOfCards.Count}");
             }
         }
         public Player SearchWinner(Card card)
