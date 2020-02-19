@@ -14,7 +14,7 @@ namespace CardGame
             var usr = new UserControl();
             var table = new Table();
             var gm = new GameManager(usr.AskPlayersForNumOfPlayer(), usr.AskForBotPlayers(), deck);
-
+            usr.PrintStarterInformation();
             while (true)
             {
                 try
@@ -31,13 +31,13 @@ namespace CardGame
                 }
                 catch(Exception e)
                 {
-                    usr.PrintErrorMessage(e);
+                    usr.Error("Invalid input!");
                 }
             }
 
             var result = gm.GetPlayers();
             result.Sort(cmp);
-            usr.PrintPlayers(result);
+            usr.PrintPlayersByRanks(result);
 
             //while(true) : round
 

@@ -1,17 +1,59 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 namespace CardGame
 {
-   public class UserControl
+    public class UserControl
     {
-        public void PrintPlayers(List<Player> players)
+        public void Info(string message)
+        {
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write("INFO: ");
+            Console.ResetColor();
+            Console.WriteLine(message);
+        }
+        public void Error(string message)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write("ERROR: ");
+            Console.ResetColor();
+            Console.Write(DateTime.Now.ToString("yyyy-mm-ddThh:mm:ss: "));
+            Console.WriteLine(message);
+        }
+        public void Input(string message)
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write("INPUT: ");
+            Console.ResetColor();
+            Console.Write(message);
+        }
+        public void PrintRankedPlayers(List<Player> players)
         {
             int count = 1;
             foreach (var player in players)
             {
-                Console.WriteLine($"[{count}.] Player ID: {player.Name}");
+                Console.WriteLine($"[{count}.] PlayerName: {player.Name}");
+                count++;
+            }
+        }
+        public void PrintPlayersByRanks(List<Player> players)
+        {
+            Console.Clear();
+            Info("The game is over!\n");
+            int count = 1;
+            foreach (var player in players)
+            {
+                if (count == 1)
+                {
+                    Console.WriteLine($"The winner is: {player.Name}!");
+                }
+                else
+                {
+                    Console.WriteLine($"{count}.place is {player.Name}");
+                }
+
                 count++;
             }
         }
@@ -25,7 +67,7 @@ namespace CardGame
                 }
                 else
                 {
-                    Console.WriteLine("There is no name that corresponds to the input");
+                    Console.WriteLine("There is no naem that corresponds to the input");
                 }
             }
         }
@@ -47,9 +89,10 @@ namespace CardGame
         }
         public int AskPlayersForNumOfPlayer()
         {
-            Console.Write("How many players wants to play: ");
+            Info("Number must be lesser than the number of players");
+            Input("How many players wants to play: ");
             int numOfPlayer = Convert.ToInt32(Console.ReadLine());
-            if(numOfPlayer<2)
+            if (numOfPlayer < 2)
             {
                 throw new Exception("");
             }
@@ -57,17 +100,20 @@ namespace CardGame
         }
         public int AskForBotPlayers()
         {
-            Console.Write("How many of them are bots: ");
+            Console.WriteLine();
+            Info("Must be lower than the number of players!");
+            Input("How many of the players you want to be bot: ");
             int numOfBotPlayers = Convert.ToInt32(Console.ReadLine());
             return numOfBotPlayers;
         }
         public string ChooseAttribute(Player player)
         {
-            if(player is HumanPlayer)
-            { 
+            Console.WriteLine($" {player.Name}'s turn: ");
+            if (player is HumanPlayer)
+            {
                 PrintCardWithAttributes(player.topCard);
                 Console.WriteLine();
-                Console.Write("Decide which attribute you want to fight with: ");
+                Console.Write($"Decide which attribute you want to fight with [hp/attack/defend/speed]: p");
                 return Console.ReadLine();
             }
             else
@@ -83,13 +129,15 @@ namespace CardGame
         }
         public string GetName()
         {
-            Console.Write("What is your names: ");
+            Input("What is your name: ");
             return Console.ReadLine();
         }
-
-        public void PrintErrorMessage(Exception exception)
+        public void PrintStarterInformation()
         {
-            Console.WriteLine($"\nERROR\\:InvadlidInput\n");
+            Info("Shuffeling cards...");
+            Thread.Sleep(500);
+            Info("Dealing cards to players...");
+            Thread.Sleep(500);
         }
     }
 }
