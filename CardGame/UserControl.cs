@@ -51,7 +51,7 @@ namespace CardGame
             int numOfPlayer = Convert.ToInt32(Console.ReadLine());
             if(numOfPlayer<2)
             {
-                throw new Exception("");
+                throw new Exception("NotValidNumberForPlayers");
             }
             return numOfPlayer;
         }
@@ -87,7 +87,7 @@ namespace CardGame
             return Console.ReadLine();
         }
 
-        public void PrintErrorMessage(Exception exception)
+        public void PrintErrorMessage()
         {
             Console.WriteLine($"\nERROR\\:InvadlidInput\n");
         }
