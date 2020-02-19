@@ -28,9 +28,9 @@ namespace CardGame
                 if (count < NumOfPlayers - NumOfBotPlayers)
                 {
                     string name = userControl.GetName();
-                    if(name.Equals(null))
+                    if(name.Equals(""))
                     {
-                        throw new Exception("NullNameException");
+                        name = "Player" + count;
                     }
                     HumanPlayer human = new HumanPlayer(deck, NumOfPlayers, name);
                     playerList.Add(human);
@@ -70,7 +70,7 @@ namespace CardGame
             }
             else
             {
-                throw new Exception("WrongAttributeAdded");
+                throw new WrongAttributeException();
             }
 
             listOfTopCards.Sort(comparer);
@@ -95,13 +95,12 @@ namespace CardGame
         {
             foreach (var player in playerList)
             {
-                Console.WriteLine($"Jatekos kartyaja: {player.topCard.Name} legmagasabb lap:{card.Name}");
                 if (player.topCard.Equals(card))
                 {
                     return player;
                 }
             }
-            throw new Exception("Not valid search");
+            throw new NullNameException();
         }
         public void GetTopCards()
         {

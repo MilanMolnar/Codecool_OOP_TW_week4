@@ -91,24 +91,40 @@ namespace CardGame
         {
             Info("Number must be lesser than the number of players");
             Input("How many players wants to play: ");
-            int numOfPlayer = Convert.ToInt32(Console.ReadLine());
-            if (numOfPlayer < 2)
+
+            int numOfPlayer;
+            if (int.TryParse(Console.ReadLine(),out numOfPlayer))
             {
-                throw new Exception("NotValidNumberForPlayers");
+                if (numOfPlayer < 2)
+                {
+                    throw new NotValidPlayerException();
+                }
+                return numOfPlayer;
             }
-            return numOfPlayer;
+            else
+            {
+                throw new NotValidPlayerException();
+            }
         }
         public int AskForBotPlayers(int numberOfPlayers)
         {
             Console.WriteLine();
             Info("Must be lower than the number of players!");
             Input("How many of the players you want to be bot: ");
-            int numOfBotPlayers = Convert.ToInt32(Console.ReadLine());
-            if(numOfBotPlayers>numberOfPlayers)
+
+            int numOfBotPlayers;
+            if (int.TryParse(Console.ReadLine(),out numOfBotPlayers))
             {
-                throw new Exception("WrongAttributeForBot");
+                if (numOfBotPlayers > numberOfPlayers)
+                {
+                    throw new NotValidBotException();
+                }
+                return numOfBotPlayers;
             }
-            return numOfBotPlayers;
+            else
+            {
+                throw new NotValidBotException();
+            }
         }
         public string ChooseAttribute(Player player)
         {
@@ -117,7 +133,7 @@ namespace CardGame
             {
                 PrintCardWithAttributes(player.topCard);
                 Console.WriteLine();
-                Console.Write($"Decide which attribute you want to fight with [hp/attack/defend/speed]: p");
+                Console.Write($"Decide which attribute you want to fight with [hp/attack/defend/speed]: ");
                 return Console.ReadLine();
             }
             else
@@ -137,7 +153,7 @@ namespace CardGame
             return Console.ReadLine();
         }
 
-        public void PrintErrorMessage(Exception exception)
+        public void PrintStarterInformation()
         {
             Info("Shuffeling cards...");
             Thread.Sleep(500);
