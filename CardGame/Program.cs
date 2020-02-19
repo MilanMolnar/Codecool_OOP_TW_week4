@@ -13,22 +13,29 @@ namespace CardGame
             var cmp = new CardComparer.SortByNumOfCards();
             var usr = new UserControl();
             var table = new Table();
-            var playerM = new PlayerManager(usr.AskPlayersForNumOfPlayer(), usr.AskForBotPlayers(), deck);
+            var gm = new GameManager(usr.AskPlayersForNumOfPlayer(), usr.AskForBotPlayers(), deck);
 
             while (true)
             {
-                playerM.RoundLogic(usr.ChooseAttribute(playerM.PrevRoundWinner), playerM.currentListOfCards, table);
-                if (playerM.IsNextRound())
-                {
-                    playerM.GetTopCards();
+                try
+                { 
+                    gm.RoundLogic(usr.ChooseAttribute(gm.PrevRoundWinner), gm.currentListOfCards, table);
+                    if (gm.IsNextRound())
+                    {
+                        gm.GetTopCards();
+                    }
+                    else
+                    {
+                        break;
+                    }
                 }
-                else
+                catch(Exception e)
                 {
-                    break;
+                    usr.PrintErrorMessage(e);
                 }
             }
 
-            var result = playerM.GetPlayers();
+            var result = gm.GetPlayers();
             result.Sort(cmp);
             usr.PrintPlayers(result);
 

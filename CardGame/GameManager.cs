@@ -6,35 +6,35 @@ namespace CardGame
 {
     public class GameManager
     {
-        List<Player> playerList= new List<Player>();
+        List<Player> playerList = new List<Player>();
         int NumOfPlayers { get; set; }
         int NumOfBotPlayers { get; set; }
         Deck deck;
         public UserControl userControl = new UserControl();
         public Player PrevRoundWinner { get; set; }
-        List<Card> currentListOfCards;
-        string selectedAttribute;
+        public List<Card> currentListOfCards;
         public GameManager(int numOfPlayers, int NumOfBotPlayers, Deck deck)
         {
             this.NumOfPlayers = numOfPlayers;
             this.NumOfBotPlayers = NumOfBotPlayers;
             this.deck = deck;
-            this.currentListOfCards = new List<Card>();
+            AddPlayers();
+            GetTopCards();
         }
-        public void AddPlayers(int numOfPlayers, int NumOfBotPlayers, Deck deck)
+        public void AddPlayers()
         {
-            for(int count=0;count<numOfPlayers;count++)
+            for (int count = 0; count < NumOfPlayers; count++)
             {
-                if(count<numOfPlayers-NumOfBotPlayers)
+                if (count < NumOfPlayers - NumOfBotPlayers)
                 {
                     string name = userControl.GetName();
-                    HumanPlayer human = new HumanPlayer(deck, numOfPlayers, name);
+                    HumanPlayer human = new HumanPlayer(deck, NumOfPlayers, name);
                     playerList.Add(human);
                 }
                 else
                 {
-                    BotPlayer bot = new BotPlayer(deck, numOfPlayers,
-                        "BOT"+(count-(numOfPlayers-NumOfBotPlayers)));
+                    BotPlayer bot = new BotPlayer(deck, NumOfPlayers,
+                        "BOT" + (count - (NumOfPlayers - NumOfBotPlayers) + 1));
                     playerList.Add(bot);
                 }
             }
@@ -45,123 +45,68 @@ namespace CardGame
             return playerList;
         }
 
-        public List<Card> SortByAttribute(string attribute, List<Card> listOfTopCards)
+        public void RoundLogic(string attribute, List<Card> listOfTopCards, Table table)
         {
+            IComparer<Card> comparer;
             if (attribute.ToLower().Equals("hp"))
             {
-                CardComparer.HPComparer comparer = new CardComparer.HPComparer();
-                listOfTopCards.Sort(comparer);
-
-                return listOfTopCards;
+                comparer = new CardComparer.HPComparer();
             }
-
             else if (attribute.ToLower().Equals("attack"))
             {
-                CardComparer.AttackComparer comparer = new CardComparer.AttackComparer();
-                listOfTopCards.Sort(comparer);
-
-                return listOfTopCards;
+                comparer = new CardComparer.AttackComparer();
             }
-
             else if (attribute.ToLower().Equals("defend"))
             {
-                CardComparer.DefendComparer comparer = new CardComparer.DefendComparer();
-                listOfTopCards.Sort(comparer);
-
-                return listOfTopCards;
+                comparer = new CardComparer.DefendComparer();
             }
-
+            else if(attribute.ToLower().Equals("speed"))
+            {
+                comparer = new CardComparer.SpeedComparer();
+            }
             else
             {
-                CardComparer.SpeedComparer comparer = new CardComparer.SpeedComparer();
-                listOfTopCards.Sort(comparer);
+                throw new Exception("WrongAttributeAdded");
+            }
 
-                return listOfTopCards;
+            listOfTopCards.Sort(comparer);
+
+            if (comparer.Compare(listOfTopCards[0], listOfTopCards[1]) == 0)
+            {
+                table.AddCardsToTable(listOfTopCards);
+            }
+            else
+            {
+                PrevRoundWinner = SearchWinner(listOfTopCards[0]);
+                listOfTopCards.AddRange(table.GetCardsFromTable());
+                table.EmptyTable();
+                PrevRoundWinner.TakeCards(listOfTopCards);
+            }
+            foreach (var player in playerList)
+            {
+                player.RemoveCard();
             }
         }
-
-
-
-
-
-
-
-
-
-
-        public void StartNewRound()
+        public Player SearchWinner(Card card)
         {
-            GetTopCards();
-            this.selectedAttribute=userControl.ChooseAttribute(PrevRoundWinner);
+            foreach (var player in playerList)
+            {
+                Console.WriteLine($"Jatekos kartyaja: {player.topCard.Name} legmagasabb lap:{card.Name}");
+                if (player.topCard.Equals(card))
+                {
+                    return player;
+                }
+            }
+            throw new Exception("Not valid search");
         }
-
-
         public void GetTopCards()
         {
-
+            currentListOfCards = new List<Card>();
             foreach (var player in playerList)
             {
                 currentListOfCards.Add(player.GetTopCard());
             }
         }
-
-
-        public void Compare()
-        {
-            //sorting
-            currentListOfCards = SortByAttribute(selectedAttribute, currentListOfCards);
-        }
-
-        public bool IsDraw()
-        {
-            if (selectedAttribute.Equals("hp"))
-            {
-                if (currentListOfCards[currentListOfCards.Count - 1].HP ==
-                    currentListOfCards[currentListOfCards.Count - 2].HP)
-                {
-                    return true;
-                }
-            }
-            else if (selectedAttribute.Equals("attack"))
-            {
-                if (currentListOfCards[currentListOfCards.Count - 1].Attack ==
-                    currentListOfCards[currentListOfCards.Count - 2].Attack)
-                {
-                    return true;
-                }
-            }
-            else if (selectedAttribute.Equals("defend"))
-            {
-                if (currentListOfCards[currentListOfCards.Count - 1].Defend ==
-                    currentListOfCards[currentListOfCards.Count - 2].Defend)
-                {
-                    return true;
-                }
-            }
-            else
-            {
-                if (currentListOfCards[currentListOfCards.Count - 1].Speed ==
-                    currentListOfCards[currentListOfCards.Count - 2].Speed)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-
-        public Player SearchWinner()
-        {
-            foreach (var player in playerList)
-            {
-                if (player.listOfCards.Contains(currentListOfCards[0]))
-                {
-                    return player;
-                }
-            }
-            throw new Exception("NotValidSearch");
-        }
-
         public bool IsNextRound()
         {
             foreach (var player in playerList)
@@ -170,14 +115,8 @@ namespace CardGame
                 {
                     return false;
                 }
-                return true;
             }
-            throw new Exception("NoPlayerException");
+            return true;
         }
-
-        //winner choosing attribute
-        //choose the winner (if draw do an another round)
-        //then empty the table
-
     }
 }

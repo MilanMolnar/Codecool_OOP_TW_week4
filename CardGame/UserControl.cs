@@ -49,6 +49,10 @@ namespace CardGame
         {
             Console.Write("How many players wants to play: ");
             int numOfPlayer = Convert.ToInt32(Console.ReadLine());
+            if(numOfPlayer<2)
+            {
+                throw new Exception("");
+            }
             return numOfPlayer;
         }
         public int AskForBotPlayers()
@@ -81,6 +85,11 @@ namespace CardGame
         {
             Console.Write("What is your names: ");
             return Console.ReadLine();
+        }
+
+        public void PrintErrorMessage(Exception exception)
+        {
+            Console.WriteLine($"\nERROR\\:InvadlidInput\n");
         }
     }
 }
