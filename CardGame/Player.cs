@@ -14,7 +14,7 @@ namespace CardGame
         protected Player(Deck deck, int numOfPlayer, string name)
         {
             this.listOfCards = deck.DealCards(numOfPlayer);
-            this.Name = name;;
+            this.Name = name; ;
         }
 
         abstract public void TakeCards(List<Card> topCards);

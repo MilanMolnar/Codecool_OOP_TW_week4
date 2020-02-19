@@ -6,8 +6,8 @@ namespace CardGame
 {
     public class BotPlayer : Player
     {
-        public BotPlayer(Deck deck, int numOfPlayers, string name) 
-            : base(deck, numOfPlayers,name)
+        public BotPlayer(Deck deck, int numOfPlayers, string name)
+            : base(deck, numOfPlayers, name)
         {
         }
 

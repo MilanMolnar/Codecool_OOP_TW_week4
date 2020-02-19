@@ -21,5 +21,10 @@ namespace CardGame
         {
             return topCards;
         }
+
+        public void AddCardsToTable(List<Card> cards)
+        {
+            topCards.AddRange(cards);
+        }
     }
 }

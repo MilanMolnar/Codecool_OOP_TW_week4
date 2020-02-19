@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-
+using System.Diagnostics.CodeAnalysis;
 
 namespace CardGame
 {
@@ -62,6 +62,22 @@ namespace CardGame
                     return 1;
                 }
                 else if (x.Speed > y.Speed)
+                {
+                    return -1;
+                }
+                else
+                    return 0;
+            }
+        }
+        public class SortByNumOfCards : IComparer<Player>
+        {
+            public int Compare(Player x, Player y)
+            {
+                if (x.GetCardCount() < y.GetCardCount())
+                {
+                    return 1;
+                }
+                else if (x.GetCardCount() > y.GetCardCount())
                 {
                     return -1;
                 }

@@ -6,7 +6,7 @@ namespace CardGame
 {
     public class HumanPlayer : Player
     {
-        public HumanPlayer(Deck deck, int numOfPlayers, string name) 
+        public HumanPlayer(Deck deck, int numOfPlayers, string name)
             : base(deck, numOfPlayers, name)
         {
         }

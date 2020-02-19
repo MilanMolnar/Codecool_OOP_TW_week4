@@ -6,10 +6,10 @@ namespace CardGamesTest
 {
     public class Tests
     {
-        [Test]
-        public void RoundGetRankListTest()
-        {
-        //    Deck d = new Deck();
+
+        //public void RoundGetRankListTest()
+        //{
+        //    //    Deck d = new Deck();
         //    HumanPlayer p1 = new HumanPlayer(d, 2);
         //    Deck d2 = new Deck();
         //    HumanPlayer p2 = new HumanPlayer(d2, 1);
@@ -29,5 +29,24 @@ namespace CardGamesTest
 
         //    Assert.AreEqual(result[0], p2);
         //}
+
+
+        //public void ComparerTest()
+        //{
+        //    var clist = new List<Card> {
+        //        new Card(1, 1, 1, 1, "c1"),
+        //        new Card(4, 4, 4, 4, "c4"),
+        //        new Card(3, 3, 3, 3, "c3"),
+        //        new Card(2, 2, 2, 2, "C2")};
+        //    var playrM = new PlayerManager(1, 1, new Deck());
+
+        //    var result = playrM.SortByAttribute("hp", clist);
+
+        //    foreach (var card in result)
+        //    {
+        //        System.Console.WriteLine(card.HP);
+        //    }
+        //}
     }
 }
+
