@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
+using ConsoleTables;
 
 namespace CardGame
 {
@@ -89,7 +90,7 @@ namespace CardGame
         }
         public int AskPlayersForNumOfPlayer()
         {
-            Info("Number must be lesser than the number of players");
+            Info("Number must be a positive whole number");
             Input("How many players wants to play: ");
             int numOfPlayer = Convert.ToInt32(Console.ReadLine());
             if (numOfPlayer < 2)
@@ -113,7 +114,7 @@ namespace CardGame
             {
                 PrintCardWithAttributes(player.topCard);
                 Console.WriteLine();
-                Console.Write($"Decide which attribute you want to fight with [hp/attack/defend/speed]: p");
+                Console.Write($"Decide which attribute you want to fight with [hp/attack/defend/speed]: ");
                 return Console.ReadLine();
             }
             else
@@ -138,6 +139,15 @@ namespace CardGame
             Thread.Sleep(500);
             Info("Dealing cards to players...");
             Thread.Sleep(500);
+        }
+        public void DisplayDeck(List<Card> deck)
+        {
+            var ct = new ConsoleTable("CARDNAME", "HEALTH", "ATTACK", "DEFENSE", "SPEED");
+            foreach (var card in deck)
+            {
+                ct.AddRow(card.Name,card.HP,card.Attack,card.Defend,card.Speed);
+            }
+            ct.Write();
         }
     }
 }

@@ -13,13 +13,19 @@ namespace CardGame
         public UserControl userControl = new UserControl();
         public Player PrevRoundWinner { get; set; }
         public List<Card> currentListOfCards;
-        public GameManager(int numOfPlayers, int NumOfBotPlayers, Deck deck)
+        public GameManager() { }
+        public GameManager(int numOfPlayers, int NumOfBotPlayers)
         {
             this.NumOfPlayers = numOfPlayers;
             this.NumOfBotPlayers = NumOfBotPlayers;
-            this.deck = deck;
+            this.deck = new Deck();
             AddPlayers();
             GetTopCards();
+        }
+        public List<Card> GetCards()
+        {
+            Deck deck = new Deck();
+            return deck.allCards;
         }
         public void AddPlayers()
         {
