@@ -8,15 +8,30 @@ namespace CardGame
     {
         static void Main(string[] args)
         {
-            //how much player
 
-            //how much bot
-
-            //PlayerManager.AddPlayers()
             Deck deck = new Deck();
-            PlayerManager playerManager = new PlayerManager();
-            Round round = new Round(playerManager);
-           
+            var cmp = new CardComparer.SortByNumOfCards();
+            var usr = new UserControl();
+            var table = new Table();
+            var playerM = new PlayerManager(usr.AskPlayersForNumOfPlayer(), usr.AskForBotPlayers(), deck);
+
+            while (true)
+            {
+                playerM.RoundLogic(usr.ChooseAttribute(playerM.PrevRoundWinner), playerM.currentListOfCards, table);
+                if (playerM.IsNextRound())
+                {
+                    playerM.GetTopCards();
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            var result = playerM.GetPlayers();
+            result.Sort(cmp);
+            usr.PrintPlayers(result);
+
             //while(true) : round
 
 
@@ -31,29 +46,14 @@ namespace CardGame
 
 
 
-            /*List<HumanPlayer> playerList = new List<HumanPlayer>();
-            var deck = new Deck();
-            Console.Write("How many players are in this round: ");
-            var numOfPlayers = Convert.ToInt32(Console.ReadLine());
 
-            for (int i = 0; i < numOfPlayers; i++)
-            {
-                //playerList.Add();
-            }
 
-            foreach (var player in playerList)
-            {
-                Console.Write(player + ": ");
-                foreach (var card in player.listOfCards)
-                {
-                    Console.WriteLine("Attack: "+card.Attack);
-                    Console.WriteLine("Hp: "+card.HP);
-                    Console.WriteLine("Def: "+card.Defend);
-                    Console.WriteLine("Speed: "+card.Speed);
-                    Console.WriteLine();
-                }
-            }
-            */
+
+
+
+
+
+
         }
     }
 }

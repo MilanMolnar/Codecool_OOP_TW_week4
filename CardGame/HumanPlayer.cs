@@ -6,7 +6,7 @@ namespace CardGame
 {
     public class HumanPlayer : Player
     {
-        public HumanPlayer(Deck deck, int numOfPlayers, string name) 
+        public HumanPlayer(Deck deck, int numOfPlayers, string name)
             : base(deck, numOfPlayers, name)
         {
         }
@@ -27,7 +27,7 @@ namespace CardGame
             return this.topCard;
         }
 
-        public override void RemoveCard(Card card)
+        public override void RemoveCard()
         {
             listOfCards.Remove(GetTopCard());
         }

@@ -7,7 +7,7 @@ namespace CardGame
 {
     public class Round
     {
-        List<Card> currentListOfCards=new List<Card>();
+        List<Card> currentListOfCards = new List<Card>();
         string selectedAttribute;
         Player prevRoundWinner;
         //playerManager.userControl.
@@ -23,32 +23,28 @@ namespace CardGame
 
         public void GetTopCards(List<Player> players)
         {
-            
+
             foreach (var player in players)
             {
                 currentListOfCards.Add(player.GetTopCard());
             }
         }
 
-        
-        public void Compare()
-        {
-            currentListOfCards=playerManager.SortByAttribute(selectedAttribute, currentListOfCards);
-        }
+
 
         public bool IsDraw()
         {
-            if(selectedAttribute.Equals("hp"))
+            if (selectedAttribute.Equals("hp"))
             {
-                if(currentListOfCards[currentListOfCards.Count-1].HP==
-                    currentListOfCards[currentListOfCards.Count-2].HP)
+                if (currentListOfCards[currentListOfCards.Count - 1].HP ==
+                    currentListOfCards[currentListOfCards.Count - 2].HP)
                 {
                     return true;
                 }
             }
             else if (selectedAttribute.Equals("attack"))
             {
-                if (currentListOfCards[currentListOfCards.Count - 1].Attack == 
+                if (currentListOfCards[currentListOfCards.Count - 1].Attack ==
                     currentListOfCards[currentListOfCards.Count - 2].Attack)
                 {
                     return true;
@@ -76,16 +72,16 @@ namespace CardGame
 
         public Player SearchWinner()
         {
-            foreach(var player in listOfPlayers)
+            foreach (var player in listOfPlayers)
             {
-                if(player.listOfCards.Contains(currentListOfCards[currentListOfCards.Count-1]))
+                if (player.listOfCards.Contains(currentListOfCards[currentListOfCards.Count - 1]))
                 {
                     return player;
                 }
             }
             throw new Exception("NotValidSearch");
         }
-       
+
         public bool IsNextRound()
         {
             foreach (var player in listOfPlayers)

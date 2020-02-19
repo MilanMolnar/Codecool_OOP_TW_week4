@@ -6,32 +6,36 @@ namespace CardGame
 {
     public class PlayerManager
     {
-        List<Player> playerList= new List<Player>();
+        List<Player> playerList = new List<Player>();
         int NumOfPlayers { get; set; }
         int NumOfBotPlayers { get; set; }
         Deck deck;
         public UserControl userControl = new UserControl();
         public Player PrevRoundWinner { get; set; }
+        public List<Card> currentListOfCards;
         public PlayerManager(int numOfPlayers, int NumOfBotPlayers, Deck deck)
         {
             this.NumOfPlayers = numOfPlayers;
             this.NumOfBotPlayers = NumOfBotPlayers;
             this.deck = deck;
+            currentListOfCards = new List<Card>();
+            AddPlayers();
+            GetTopCards();
         }
-        public void AddPlayers(int numOfPlayers, int NumOfBotPlayers, Deck deck)
+        public void AddPlayers()
         {
-            for(int count=0;count<numOfPlayers;count++)
+            for (int count = 0; count < NumOfPlayers; count++)
             {
-                if(count<numOfPlayers-NumOfBotPlayers)
+                if (count < NumOfPlayers - NumOfBotPlayers)
                 {
                     string name = userControl.GetName();
-                    HumanPlayer human = new HumanPlayer(deck, numOfPlayers, name);
+                    HumanPlayer human = new HumanPlayer(deck, NumOfPlayers, name);
                     playerList.Add(human);
                 }
                 else
                 {
-                    BotPlayer bot = new BotPlayer(deck, numOfPlayers,
-                        "BOT"+(count-(numOfPlayers-NumOfBotPlayers)));
+                    BotPlayer bot = new BotPlayer(deck, NumOfPlayers,
+                        "BOT" + (count - (NumOfPlayers - NumOfBotPlayers)));
                     playerList.Add(bot);
                 }
             }
@@ -42,40 +46,72 @@ namespace CardGame
             return playerList;
         }
 
-        public List<Card> SortByAttribute(string attribute, List<Card> listOfTopCards)
+        public void RoundLogic(string attribute, List<Card> listOfTopCards, Table table)
         {
+            IComparer<Card> comparer;
             if (attribute.ToLower().Equals("hp"))
             {
-                CardComparer.HPComparer comparer = new CardComparer.HPComparer();
-                listOfTopCards.Sort(comparer);
-
-                return listOfTopCards;
+                comparer = new CardComparer.HPComparer();
             }
-
             else if (attribute.ToLower().Equals("attack"))
             {
-                CardComparer.AttackComparer comparer = new CardComparer.AttackComparer();
-                listOfTopCards.Sort(comparer);
-
-                return listOfTopCards;
+                comparer = new CardComparer.AttackComparer();
             }
-
             else if (attribute.ToLower().Equals("defend"))
             {
-                CardComparer.DefendComparer comparer = new CardComparer.DefendComparer();
-                listOfTopCards.Sort(comparer);
-
-                return listOfTopCards;
+                comparer = new CardComparer.DefendComparer();
             }
-
             else
             {
-                CardComparer.SpeedComparer comparer = new CardComparer.SpeedComparer();
-                listOfTopCards.Sort(comparer);
+                comparer = new CardComparer.SpeedComparer();
+            }
+            listOfTopCards.Sort(comparer);
 
-                return listOfTopCards;
+            if (comparer.Compare(listOfTopCards[0], listOfTopCards[1]) == 0)
+            {
+                table.AddCardsToTable(listOfTopCards);
+            }
+            else
+            {
+                PrevRoundWinner = SearchWinner(listOfTopCards[0]);
+                listOfTopCards.AddRange(table.GetCardsFromTable());
+                table.EmptyTable();
+                PrevRoundWinner.TakeCards(listOfTopCards);
+            }
+            foreach (var player in playerList)
+            {
+                player.RemoveCard();
             }
         }
-
+        public Player SearchWinner(Card card)
+        {
+            foreach (var player in playerList)
+            {
+                if (player.topCard.Equals(card))
+                {
+                    Console.WriteLine($"Jatekos kartyaja: {player.topCard.Name} legmagasabb lap:{card.Name}");
+                    return player;
+                }
+            }
+            throw new Exception("Not valid search");
+        }
+        public void GetTopCards()
+        {
+            foreach (var player in playerList)
+            {
+                currentListOfCards.Add(player.GetTopCard());
+            }
+        }
+        public bool IsNextRound()
+        {
+            foreach (var player in playerList)
+            {
+                if (player.GetCardCount() == 0)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 }
