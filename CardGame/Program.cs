@@ -8,9 +8,10 @@ namespace CardGame
     {
         static void Main(string[] args)
         {
-            var cmp = new CardComparer.SortByNumOfCards();
-            var usr = new UserControl();
+            var cc = new CardComparer.SortByNumOfCards();
+            var uc = new UserControl();
             var table = new Table();
+            int roundNumber = 1;
 
             Menu menu = new Menu();
             GameManager gm;
@@ -19,12 +20,13 @@ namespace CardGame
 
 
 
-            usr.PrintStarterInformation();
+            uc.PrintStarterInformation();
             while (true)
             {
+                uc.PrintRoundNumber(roundNumber);
                 try
                 {
-                    gm.RoundLogic(usr.ChooseAttribute(gm.PrevRoundWinner), gm.currentListOfCards, table);
+                    gm.RoundLogic(uc.ChooseAttribute(gm.PrevRoundWinner), gm.currentListOfCards, table);
                     if (gm.IsNextRound())
                     {
                         gm.GetTopCards();
@@ -36,20 +38,22 @@ namespace CardGame
                 }
                 catch (NullNameException)
                 {
-                    usr.Error("Name not found!");
+                    uc.Error("Name not found!");
                 }
                 catch (NotEnoughCardException)
                 {
-                    usr.Error("Not enough cards for players!\n\n");
+                    uc.Error("Not enough cards for players!\n\n");
                 }
                 catch (WrongAttributeException)
                 {
-                    usr.Error("Wrong attribute!\n\n");
+                    uc.Error("Wrong attribute!\n\n");
                 }
+                uc.PrintRoundWinner(gm.PrevRoundWinner, roundNumber);
+                roundNumber++;
             }
             var result = gm.GetPlayers();
-            result.Sort(cmp);
-            usr.PrintPlayersByRanks(result);
+            result.Sort(cc);
+            uc.PrintPlayersByRanks(result);
         }
     }
 }

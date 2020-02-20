@@ -91,7 +91,7 @@ namespace CardGame
         public int AskPlayersForNumOfPlayer()
         {
             Info("Number must be a positive whole number");
-            Input("How many players wants to play: ");
+            Input("Specify the number of players: ");
 
             int numOfPlayer;
             if (int.TryParse(Console.ReadLine(),out numOfPlayer))
@@ -110,7 +110,10 @@ namespace CardGame
         public int AskForBotPlayers(int numberOfPlayers=int.MaxValue)
         {
             Console.WriteLine();
-            Info("Must be lower than the number of players!");
+            if (numberOfPlayers != int.MaxValue)
+            {
+                Input($"Number must be fewer than {numberOfPlayers}.\n");
+            }
             Input("How many of the players you want to be bot: ");
 
             int numOfBotPlayers;
@@ -139,9 +142,17 @@ namespace CardGame
             }
             else
             {
+                Thread.Sleep(500);
+                PrintCardWithAttributes(player.topCard);
+                Thread.Sleep(500);
+                Info($"{player.Name} is choosing...");
+                Thread.Sleep(1000);
                 Random rand = new Random();
                 string[] attributes = new string[] { "hp", "attack", "defend", "speed" };
-                return attributes[rand.Next(0, 4)];
+                string chosenAttribute = attributes[rand.Next(0, 4)];
+                Info($"{player.Name} choose: {chosenAttribute}");
+                Thread.Sleep(500);
+                return chosenAttribute;
             }
         }
         public void PrintWinner(Player winner)
@@ -173,6 +184,15 @@ namespace CardGame
             Input("Press any button to close deck display...");
             Console.ReadLine();
             Console.Clear();
+        }
+        public void PrintRoundWinner(Player winner, int round)
+        {
+            Info($"Round [{round}] Winner is {winner.Name}\n");
+        }
+        public void PrintRoundNumber(int round)
+        {
+            Info($"Round[{round}]----------------\n");
+            Thread.Sleep(1000);
         }
     }
 }
