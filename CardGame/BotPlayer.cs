@@ -6,9 +6,15 @@ namespace CardGame
 {
     public class BotPlayer : Player
     {
+        List<int> maxValuesOfTheGame;
+        public int Hp { get { return maxValuesOfTheGame[0]; } }
+        public int Attack { get { return maxValuesOfTheGame[1]; } }
+        public int Defense { get { return maxValuesOfTheGame[2]; } }
+        public int Speed { get { return maxValuesOfTheGame[3]; } }
         public BotPlayer(Deck deck, int numOfPlayers, string name)
             : base(deck, numOfPlayers, name)
         {
+            maxValuesOfTheGame = deck.MaxValuesForAttributes;
         }
 
         public override void TakeCards(List<Card> topCards)
@@ -33,5 +39,6 @@ namespace CardGame
         {
             listOfCards.Remove(GetTopCard());
         }
+
     }
 }

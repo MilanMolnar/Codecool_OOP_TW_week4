@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using ConsoleTables;
@@ -30,15 +31,7 @@ namespace CardGame
             Console.ResetColor();
             Console.Write(message);
         }
-        public void PrintRankedPlayers(List<Player> players)
-        {
-            int count = 1;
-            foreach (var player in players)
-            {
-                Console.WriteLine($"[{count}.] PlayerName: {player.Name}");
-                count++;
-            }
-        }
+        
         public void PrintPlayersByRanks(List<Player> players)
         {
             Console.Clear();
@@ -48,38 +41,17 @@ namespace CardGame
             {
                 if (count == 1)
                 {
-                    Console.WriteLine($"The winner is: {player.Name}!");
+                    Console.WriteLine($"The winner is: {player.Name}:\t\t{player.listOfCards.Count}");
                 }
                 else
                 {
-                    Console.WriteLine($"{count}.place is {player.Name}");
+                    Console.WriteLine($"{count}.place is {player.Name}:\t\t{player.listOfCards.Count}");
                 }
 
                 count++;
             }
         }
-        public void PrintPlayersTopCard(string name, List<Player> players)
-        {
-            foreach (var player in players)
-            {
-                if (player.Name == name)
-                {
-                    Console.WriteLine($"Player's ({player.Name}) top card: {player.topCard}");
-                }
-                else
-                {
-                    Console.WriteLine("There is no naem that corresponds to the input");
-                }
-            }
-        }
-        public void PrintCards(List<Card> cards)
-        {
-            int count = 1;
-            foreach (var card in cards)
-            {
-                Console.WriteLine($"[{count}] Card's name: {card.Name}");
-            }
-        }
+        
         public void PrintCardWithAttributes(Card card)
         {
             Console.WriteLine($"Card Name: {card.Name}:");
@@ -91,7 +63,7 @@ namespace CardGame
         public int AskPlayersForNumOfPlayer()
         {
             Info("Number must be a positive whole number");
-            Input("How many players wants to play: ");
+            Input("Specify the number of players: ");
 
             int numOfPlayer;
             if (int.TryParse(Console.ReadLine(),out numOfPlayer))
@@ -110,7 +82,10 @@ namespace CardGame
         public int AskForBotPlayers(int numberOfPlayers=int.MaxValue)
         {
             Console.WriteLine();
-            Info("Must be lower than the number of players!");
+            if (numberOfPlayers != int.MaxValue)
+            {
+                Input($"Number must be fewer than {numberOfPlayers}.\n");
+            }
             Input("How many of the players you want to be bot: ");
 
             int numOfBotPlayers;
@@ -139,15 +114,30 @@ namespace CardGame
             }
             else
             {
-                Random rand = new Random();
-                string[] attributes = new string[] { "hp", "attack", "defend", "speed" };
-                return attributes[rand.Next(0, 4)];
+                BotPlayer botPlayer = (BotPlayer)player;
+
+                Thread.Sleep(500);
+                PrintCardWithAttributes(player.topCard);
+                Thread.Sleep(500);
+                Info($"{player.Name} is choosing...");
+                Thread.Sleep(1000);
+
+                string chosenAttribute;
+
+                Dictionary<string, double> dictioanryOfChoices = new Dictionary<string, double>();
+                dictioanryOfChoices["hp"] = player.topCard.HP / botPlayer.Hp; ;
+                dictioanryOfChoices["attack"] = player.topCard.Attack / botPlayer.Attack;
+                dictioanryOfChoices["defend"] = player.topCard.Defend / botPlayer.Defense;
+                dictioanryOfChoices["speed"]= player.topCard.Speed / botPlayer.Speed;
+
+                chosenAttribute = dictioanryOfChoices.Aggregate((x, y) => x.Value > y.Value ? x : y).Key;
+
+                Info($"{player.Name} choose: {chosenAttribute}");
+                Thread.Sleep(500);
+                return chosenAttribute;
             }
         }
-        public void PrintWinner(Player winner)
-        {
-            Console.WriteLine($"The winner is {winner.Name}!");
-        }
+       
         public string GetName()
         {
             Input("What is your name: ");
@@ -173,6 +163,22 @@ namespace CardGame
             Input("Press any button to close deck display...");
             Console.ReadLine();
             Console.Clear();
+        }
+        public void PrintRoundWinner(Player winner, int round)
+        {
+            Info($"Round [{round}] Winner is {winner.Name}\tCards: {winner.listOfCards.Count}\n");
+        }
+        public void PrintRoundNumber(int round)
+        {
+            Info($"Round[{round}]----------------\n");
+            Thread.Sleep(1000);
+        }
+        public void GoToRankList(List<Player> players)
+        {
+            Console.WriteLine();
+            string winner = players[0].Name;
+            Info($"The winner is {winner}.\nPress ENTER to continue to ranklist.");
+            Console.ReadLine();
         }
     }
 }
