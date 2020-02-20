@@ -30,7 +30,8 @@ namespace CardGame
                 }
                 else if (selectedMenuItem == "PLAYERS VS BOTS")
                 {
-                    return new GameManager(uc.AskPlayersForNumOfPlayer(), uc.AskForBotPlayers());
+                    int numOfPlayers = uc.AskPlayersForNumOfPlayer();
+                    return new GameManager(numOfPlayers, uc.AskForBotPlayers(numOfPlayers));
                 }
                 else if (selectedMenuItem == "SIMULATION")
                 {
