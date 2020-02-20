@@ -1,52 +1,39 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using CardGame;
+using System.Linq;
 
 namespace CardGamesTest
 {
     public class Tests
     {
 
-        //public void RoundGetRankListTest()
-        //{
-        //    //    Deck d = new Deck();
-        //    HumanPlayer p1 = new HumanPlayer(d, 2);
-        //    Deck d2 = new Deck();
-        //    HumanPlayer p2 = new HumanPlayer(d2, 1);
-        //    Deck d3 = new Deck();
-        //    HumanPlayer p3 = new HumanPlayer(d3, 3);
-        //    Deck d4 = new Deck();
-        //    HumanPlayer p4 = new HumanPlayer(d4, 4);
+        [Test]
+        public void ComparerTest_()
+        {
+            var hpCompare = new CardComparer.HPComparer();
+            var clist = new List<Card> {
+                new Card(1, 1, 1, 1, "c1"),
+                new Card(4, 4, 4, 4, "c4"),
+                new Card(3, 3, 3, 3, "c3"),
+                new Card(2, 2, 2, 2, "C2")};
 
-        //    List<HumanPlayer> l = new List<HumanPlayer>();
-        //    l.Add(p2);
-        //    l.Add(p4);
-        //    l.Add(p1);
-        //    l.Add(p3);
+            var expectedList = clist.OrderByDescending(x => x.HP);
+            clist.Sort(hpCompare);
 
-        //    Round r = new Round(l);
-        //    List<HumanPlayer> result=r.GetRankList(l);
+            Assert.IsTrue(expectedList.SequenceEqual(clist));
+        }
+        [Test]
+        public void GetMaxValuesTest()
+        {
+            var expectedList = new List<int> { 2210, 321, 423, 432 };
+            var player = new BotPlayer(new Deck(), 3, "Boti");
 
-        //    Assert.AreEqual(result[0], p2);
-        //}
+            var actualList = new List<int> { player.Hp, player.Attack, player.Defense, player.Speed };
 
+            Assert.IsTrue(expectedList.SequenceEqual(actualList));
+        }
 
-        //public void ComparerTest()
-        //{
-        //    var clist = new List<Card> {
-        //        new Card(1, 1, 1, 1, "c1"),
-        //        new Card(4, 4, 4, 4, "c4"),
-        //        new Card(3, 3, 3, 3, "c3"),
-        //        new Card(2, 2, 2, 2, "C2")};
-        //    var playrM = new PlayerManager(1, 1, new Deck());
-
-        //    var result = playrM.SortByAttribute("hp", clist);
-
-        //    foreach (var card in result)
-        //    {
-        //        System.Console.WriteLine(card.HP);
-        //    }
-        //}
     }
 }
 
