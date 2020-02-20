@@ -35,6 +35,8 @@ namespace CardGame
                     {
                         break;
                     }
+                    uc.PrintRoundWinner(gm.PrevRoundWinner, roundNumber);
+                    roundNumber++;
                 }
                 catch (NullNameException)
                 {
@@ -48,8 +50,6 @@ namespace CardGame
                 {
                     uc.Error("Wrong attribute!\n\n");
                 }
-                uc.PrintRoundWinner(gm.PrevRoundWinner, roundNumber);
-                roundNumber++;
             }
             var result = gm.GetPlayers();
             result.Sort(cc);

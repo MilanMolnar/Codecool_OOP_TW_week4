@@ -30,15 +30,7 @@ namespace CardGame
             Console.ResetColor();
             Console.Write(message);
         }
-        public void PrintRankedPlayers(List<Player> players)
-        {
-            int count = 1;
-            foreach (var player in players)
-            {
-                Console.WriteLine($"[{count}.] PlayerName: {player.Name}");
-                count++;
-            }
-        }
+        
         public void PrintPlayersByRanks(List<Player> players)
         {
             Console.Clear();
@@ -58,28 +50,7 @@ namespace CardGame
                 count++;
             }
         }
-        public void PrintPlayersTopCard(string name, List<Player> players)
-        {
-            foreach (var player in players)
-            {
-                if (player.Name == name)
-                {
-                    Console.WriteLine($"Player's ({player.Name}) top card: {player.topCard}");
-                }
-                else
-                {
-                    Console.WriteLine("There is no naem that corresponds to the input");
-                }
-            }
-        }
-        public void PrintCards(List<Card> cards)
-        {
-            int count = 1;
-            foreach (var card in cards)
-            {
-                Console.WriteLine($"[{count}] Card's name: {card.Name}");
-            }
-        }
+        
         public void PrintCardWithAttributes(Card card)
         {
             Console.WriteLine($"Card Name: {card.Name}:");
@@ -155,10 +126,7 @@ namespace CardGame
                 return chosenAttribute;
             }
         }
-        public void PrintWinner(Player winner)
-        {
-            Console.WriteLine($"The winner is {winner.Name}!");
-        }
+       
         public string GetName()
         {
             Input("What is your name: ");
@@ -187,7 +155,7 @@ namespace CardGame
         }
         public void PrintRoundWinner(Player winner, int round)
         {
-            Info($"Round [{round}] Winner is {winner.Name}\n");
+            Info($"Round [{round}] Winner is {winner.Name}\tCards: {winner.listOfCards.Count}\n");
         }
         public void PrintRoundNumber(int round)
         {

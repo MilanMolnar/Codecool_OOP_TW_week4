@@ -26,17 +26,54 @@ namespace CardGame
                 string selectedMenuItem = drawMenu(menuItems);
                 if (selectedMenuItem == "PLAYERS VS PLAYERS")
                 {
-                    return new GameManager(uc.AskPlayersForNumOfPlayer(), 0);
+                    while(true)
+                    { 
+                        try
+                        {
+                            return new GameManager(uc.AskPlayersForNumOfPlayer(), 0);
+                        }
+                        catch(NotValidPlayerException)
+                        {
+                            uc.Error("Invalid player number format!");
+                        }
+                    }
                 }
                 else if (selectedMenuItem == "PLAYERS VS BOTS")
                 {
-                    int numOfPlayers = uc.AskPlayersForNumOfPlayer();
-                    return new GameManager(numOfPlayers, uc.AskForBotPlayers(numOfPlayers));
+                    while(true)
+                    {
+                        int numOfPlayers=0;
+                        try
+                        {
+                            numOfPlayers = uc.AskPlayersForNumOfPlayer();
+                        }
+                        catch (NotValidPlayerException)
+                        {
+                            uc.Error("Invalid player number format!");
+                            continue;
+                        }
+
+                        try
+                        {
+                            return new GameManager(numOfPlayers, uc.AskForBotPlayers(numOfPlayers));
+                        }
+                        catch(NotValidBotException)
+                        {
+                            uc.Error("Invalid bot number format!");
+                        }
+                    }
                 }
                 else if (selectedMenuItem == "SIMULATION")
                 {
-                    int numOfBots = uc.AskForBotPlayers();
-                    return new GameManager(numOfBots, numOfBots);
+                    try
+                    { 
+                        int numOfBots = uc.AskForBotPlayers();
+                        return new GameManager(numOfBots, numOfBots);
+                    }
+                    catch (NotValidBotException)
+                    {
+                        uc.Error("Invalid bot number format!");
+                    }
                 }
                 else if (selectedMenuItem == "DISPLAY ALL CARD")
                 {
