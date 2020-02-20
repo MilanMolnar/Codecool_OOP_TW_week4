@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using ConsoleTables;
@@ -40,11 +41,11 @@ namespace CardGame
             {
                 if (count == 1)
                 {
-                    Console.WriteLine($"The winner is: {player.Name}!");
+                    Console.WriteLine($"The winner is: {player.Name}:\t\t{player.listOfCards.Count}");
                 }
                 else
                 {
-                    Console.WriteLine($"{count}.place is {player.Name}");
+                    Console.WriteLine($"{count}.place is {player.Name}:\t\t{player.listOfCards.Count}");
                 }
 
                 count++;
@@ -113,14 +114,24 @@ namespace CardGame
             }
             else
             {
+                BotPlayer botPlayer = (BotPlayer)player;
+
                 Thread.Sleep(500);
                 PrintCardWithAttributes(player.topCard);
                 Thread.Sleep(500);
                 Info($"{player.Name} is choosing...");
                 Thread.Sleep(1000);
-                Random rand = new Random();
-                string[] attributes = new string[] { "hp", "attack", "defend", "speed" };
-                string chosenAttribute = attributes[rand.Next(0, 4)];
+
+                string chosenAttribute;
+
+                Dictionary<string, double> dictioanryOfChoices = new Dictionary<string, double>();
+                dictioanryOfChoices["hp"] = player.topCard.HP / botPlayer.Hp; ;
+                dictioanryOfChoices["attack"] = player.topCard.Attack / botPlayer.Attack;
+                dictioanryOfChoices["defend"] = player.topCard.Defend / botPlayer.Defense;
+                dictioanryOfChoices["speed"]= player.topCard.Speed / botPlayer.Speed;
+
+                chosenAttribute = dictioanryOfChoices.Aggregate((x, y) => x.Value > y.Value ? x : y).Key;
+
                 Info($"{player.Name} choose: {chosenAttribute}");
                 Thread.Sleep(500);
                 return chosenAttribute;
