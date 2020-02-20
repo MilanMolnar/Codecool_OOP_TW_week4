@@ -107,7 +107,7 @@ namespace CardGame
                 throw new NotValidPlayerException();
             }
         }
-        public int AskForBotPlayers(int numberOfPlayers)
+        public int AskForBotPlayers(int numberOfPlayers=int.MaxValue)
         {
             Console.WriteLine();
             Info("Must be lower than the number of players!");
@@ -163,12 +163,16 @@ namespace CardGame
         }
         public void DisplayDeck(List<Card> deck)
         {
+            Console.Clear();
             var ct = new ConsoleTable("CARDNAME", "HEALTH", "ATTACK", "DEFENSE", "SPEED");
             foreach (var card in deck)
             {
                 ct.AddRow(card.Name,card.HP,card.Attack,card.Defend,card.Speed);
             }
             ct.Write();
+            Input("Press any button to close deck display...");
+            Console.ReadLine();
+            Console.Clear();
         }
     }
 }

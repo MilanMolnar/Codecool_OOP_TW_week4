@@ -8,50 +8,22 @@ namespace CardGame
     {
         static void Main(string[] args)
         {
-            Deck deck = new Deck();
             var cmp = new CardComparer.SortByNumOfCards();
             var usr = new UserControl();
             var table = new Table();
 
-            int numberOfPlayers;
-            int numberOfBots;
+            Menu menu = new Menu();
             GameManager gm;
-            while (true)
-            {
-                try
-                {
-                    numberOfPlayers = usr.AskPlayersForNumOfPlayer();
-                    break;
-                }
-                catch (NotValidPlayerException)
-                {
-                    usr.Error("Players number must be 2 or greater!\n\n");
-                }
-            }
 
-            while(true)
-            { 
-                try
-                {
-                    numberOfBots = usr.AskForBotPlayers(numberOfPlayers);
-                    break;
-                }
-                catch (NotValidBotException)
-                {
-                    usr.Error("Bots number are greater than playable slots!\n\n");
-                }
-            }
+            gm = menu.MainMenu();
 
-           
-            deck = new Deck();
-            gm = new GameManager(numberOfPlayers, numberOfBots, deck);
-           
+
 
             usr.PrintStarterInformation();
             while (true)
             {
                 try
-                { 
+                {
                     gm.RoundLogic(usr.ChooseAttribute(gm.PrevRoundWinner), gm.currentListOfCards, table);
                     if (gm.IsNextRound())
                     {
@@ -62,7 +34,7 @@ namespace CardGame
                         break;
                     }
                 }
-                catch(NullNameException)
+                catch (NullNameException)
                 {
                     usr.Error("Name not found!");
                 }
@@ -74,7 +46,10 @@ namespace CardGame
                 {
                     usr.Error("Wrong attribute!\n\n");
                 }
-            }                
+            }
+            var result = gm.GetPlayers();
+            result.Sort(cmp);
+            usr.PrintPlayersByRanks(result);
         }
     }
 }
