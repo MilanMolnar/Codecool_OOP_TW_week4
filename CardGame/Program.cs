@@ -14,48 +14,48 @@ namespace CardGame
             int roundNumber = 1;
 
             Menu menu = new Menu();
-            GameManager gm;
-
-            gm = menu.MainMenu();
-
-
-
-            uc.PrintStarterInformation();
-            Console.Clear();
             while (true)
             {
-                uc.PrintRoundNumber(roundNumber);
-                try
+                GameManager gm;
+                gm = menu.MainMenu();
+
+                uc.PrintStarterInformation();
+                Console.Clear();
+                while (true)
                 {
-                    gm.RoundLogic(uc.ChooseAttribute(gm.PrevRoundWinner), gm.currentListOfCards, table);
-                    if (gm.IsNextRound())
+                    uc.PrintRoundNumber(roundNumber);
+                    try
                     {
-                        gm.GetTopCards();
+                        gm.RoundLogic(uc.ChooseAttribute(gm.PrevRoundWinner), gm.currentListOfCards, table);
+                        if (gm.IsNextRound())
+                        {
+                            gm.GetTopCards();
+                        }
+                        else
+                        {
+                            break;
+                        }
+                        uc.PrintRoundWinner(gm.PrevRoundWinner, roundNumber);
+                        roundNumber++;
                     }
-                    else
+                    catch (NullNameException)
                     {
-                        break;
+                        uc.Error("Name not found!");
                     }
-                    uc.PrintRoundWinner(gm.PrevRoundWinner, roundNumber);
-                    roundNumber++;
+                    catch (NotEnoughCardException)
+                    {
+                        uc.Error("Not enough cards for players!\n\n");
+                    }
+                    catch (WrongAttributeException)
+                    {
+                        uc.Error("Wrong attribute!\n\n");
+                    }
                 }
-                catch (NullNameException)
-                {
-                    uc.Error("Name not found!");
-                }
-                catch (NotEnoughCardException)
-                {
-                    uc.Error("Not enough cards for players!\n\n");
-                }
-                catch (WrongAttributeException)
-                {
-                    uc.Error("Wrong attribute!\n\n");
-                }
+                var result = gm.GetPlayers();
+                result.Sort(cc);
+                uc.GoToRankList(result);
+                uc.PrintPlayersByRanks(result);
             }
-            var result = gm.GetPlayers();
-            result.Sort(cc);
-            uc.GoToRankList(result);
-            uc.PrintPlayersByRanks(result);
         }
     }
 }

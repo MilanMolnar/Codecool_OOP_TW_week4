@@ -34,7 +34,7 @@ namespace CardGame
                 if (count < NumOfPlayers - NumOfBotPlayers)
                 {
                     string name = userControl.GetName();
-                    if(name.Equals(""))
+                    if (name.Equals(""))
                     {
                         name = "Player" + count;
                     }
@@ -70,7 +70,7 @@ namespace CardGame
             {
                 comparer = new CardComparer.DefendComparer();
             }
-            else if(attribute.ToLower().Equals("speed"))
+            else if (attribute.ToLower().Equals("speed"))
             {
                 comparer = new CardComparer.SpeedComparer();
             }
@@ -94,9 +94,7 @@ namespace CardGame
             }
             foreach (var player in playerList)
             {
-
                 player.RemoveCard();
-                Console.WriteLine($"{player.Name}: {player.listOfCards.Count}");
             }
         }
         public Player SearchWinner(Card card)

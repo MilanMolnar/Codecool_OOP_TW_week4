@@ -26,13 +26,13 @@ namespace CardGame
                 string selectedMenuItem = drawMenu(menuItems);
                 if (selectedMenuItem == "PLAYERS VS PLAYERS")
                 {
-                    while(true)
-                    { 
+                    while (true)
+                    {
                         try
                         {
                             return new GameManager(uc.AskPlayersForNumOfPlayer(), 0);
                         }
-                        catch(NotValidPlayerException)
+                        catch (NotValidPlayerException)
                         {
                             uc.Error("Invalid player number format!");
                         }
@@ -40,9 +40,9 @@ namespace CardGame
                 }
                 else if (selectedMenuItem == "PLAYERS VS BOTS")
                 {
-                    while(true)
+                    while (true)
                     {
-                        int numOfPlayers=0;
+                        int numOfPlayers = 0;
                         try
                         {
                             numOfPlayers = uc.AskPlayersForNumOfPlayer();
@@ -57,7 +57,7 @@ namespace CardGame
                         {
                             return new GameManager(numOfPlayers, uc.AskForBotPlayers(numOfPlayers));
                         }
-                        catch(NotValidBotException)
+                        catch (NotValidBotException)
                         {
                             uc.Error("Invalid bot number format!");
                         }
@@ -66,7 +66,7 @@ namespace CardGame
                 else if (selectedMenuItem == "SIMULATION")
                 {
                     try
-                    { 
+                    {
                         int numOfBots = uc.AskForBotPlayers();
                         return new GameManager(numOfBots, numOfBots);
                     }

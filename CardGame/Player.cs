@@ -6,7 +6,6 @@ namespace CardGame
 {
     public abstract class Player
     {
-
         public List<Card> listOfCards;
         public string SelectedAttribute { get; set; }
         public Card topCard { get { return listOfCards[0]; } }

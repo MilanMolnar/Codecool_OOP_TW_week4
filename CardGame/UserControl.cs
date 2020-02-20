@@ -31,7 +31,7 @@ namespace CardGame
             Console.ResetColor();
             Console.Write(message);
         }
-        
+
         public void PrintPlayersByRanks(List<Player> players)
         {
             Console.Clear();
@@ -47,11 +47,10 @@ namespace CardGame
                 {
                     Console.WriteLine($"{count}.place is {player.Name}:\t\t{player.listOfCards.Count}");
                 }
-
                 count++;
             }
         }
-        
+
         public void PrintCardWithAttributes(Card card)
         {
             Console.WriteLine($"Card Name: {card.Name}:");
@@ -66,7 +65,7 @@ namespace CardGame
             Input("Specify the number of players: ");
 
             int numOfPlayer;
-            if (int.TryParse(Console.ReadLine(),out numOfPlayer))
+            if (int.TryParse(Console.ReadLine(), out numOfPlayer))
             {
                 if (numOfPlayer < 2)
                 {
@@ -79,7 +78,7 @@ namespace CardGame
                 throw new NotValidPlayerException();
             }
         }
-        public int AskForBotPlayers(int numberOfPlayers=int.MaxValue)
+        public int AskForBotPlayers(int numberOfPlayers = int.MaxValue)
         {
             Console.WriteLine();
             if (numberOfPlayers != int.MaxValue)
@@ -89,7 +88,7 @@ namespace CardGame
             Input("How many of the players you want to be bot: ");
 
             int numOfBotPlayers;
-            if (int.TryParse(Console.ReadLine(),out numOfBotPlayers))
+            if (int.TryParse(Console.ReadLine(), out numOfBotPlayers))
             {
                 if (numOfBotPlayers > numberOfPlayers)
                 {
@@ -128,7 +127,7 @@ namespace CardGame
                 dictioanryOfChoices["hp"] = player.topCard.HP / botPlayer.Hp; ;
                 dictioanryOfChoices["attack"] = player.topCard.Attack / botPlayer.Attack;
                 dictioanryOfChoices["defend"] = player.topCard.Defend / botPlayer.Defense;
-                dictioanryOfChoices["speed"]= player.topCard.Speed / botPlayer.Speed;
+                dictioanryOfChoices["speed"] = player.topCard.Speed / botPlayer.Speed;
 
                 chosenAttribute = dictioanryOfChoices.Aggregate((x, y) => x.Value > y.Value ? x : y).Key;
 
@@ -137,7 +136,7 @@ namespace CardGame
                 return chosenAttribute;
             }
         }
-       
+
         public string GetName()
         {
             Input("What is your name: ");
@@ -157,7 +156,7 @@ namespace CardGame
             var ct = new ConsoleTable("CARDNAME", "HEALTH", "ATTACK", "DEFENSE", "SPEED");
             foreach (var card in deck)
             {
-                ct.AddRow(card.Name,card.HP,card.Attack,card.Defend,card.Speed);
+                ct.AddRow(card.Name, card.HP, card.Attack, card.Defend, card.Speed);
             }
             ct.Write();
             Input("Press any button to close deck display...");
