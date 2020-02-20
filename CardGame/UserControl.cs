@@ -173,5 +173,12 @@ namespace CardGame
             Info($"Round[{round}]----------------\n");
             Thread.Sleep(1000);
         }
+        public void GoToRankList(List<Player> players)
+        {
+            Console.WriteLine();
+            string winner = players[0].Name;
+            Info($"The winner is {winner}.\nPress ENTER to continue to ranklist.");
+            Console.ReadLine();
+        }
     }
 }

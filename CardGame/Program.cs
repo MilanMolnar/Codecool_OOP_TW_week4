@@ -21,6 +21,7 @@ namespace CardGame
 
 
             uc.PrintStarterInformation();
+            Console.Clear();
             while (true)
             {
                 uc.PrintRoundNumber(roundNumber);
@@ -53,6 +54,7 @@ namespace CardGame
             }
             var result = gm.GetPlayers();
             result.Sort(cc);
+            uc.GoToRankList(result);
             uc.PrintPlayersByRanks(result);
         }
     }
