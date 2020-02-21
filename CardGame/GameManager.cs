@@ -14,6 +14,10 @@ namespace CardGame
         public Player PrevRoundWinner { get; set; }
         public List<Card> currentListOfCards;
         public GameManager() { }
+        public GameManager(List<Player> plist)
+        {
+            this.playerList = plist;
+        }
         public GameManager(int numOfPlayers, int NumOfBotPlayers)
         {
             this.NumOfPlayers = numOfPlayers;
