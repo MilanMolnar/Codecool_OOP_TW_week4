@@ -120,15 +120,7 @@ namespace CardGame
                 Info($"{player.Name} is choosing...");
                 Thread.Sleep(1000);
 
-                string chosenAttribute;
-
-                Dictionary<string, double> dictioanryOfChoices = new Dictionary<string, double>();
-                dictioanryOfChoices["hp"] = player.topCard.HP / (double)botPlayer.Hp; ;
-                dictioanryOfChoices["attack"] = player.topCard.Attack / (double)botPlayer.Attack;
-                dictioanryOfChoices["defend"] = player.topCard.Defend / (double)botPlayer.Defense;
-                dictioanryOfChoices["speed"] = player.topCard.Speed / (double)botPlayer.Speed;
-
-                chosenAttribute = dictioanryOfChoices.Aggregate((x, y) => x.Value > y.Value ? x : y).Key;
+                string chosenAttribute = botPlayer.ChoosenAttribute(player);
 
                 Info($"{player.Name} choose: {chosenAttribute}");
                 Thread.Sleep(500);

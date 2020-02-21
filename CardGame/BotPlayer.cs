@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace CardGame
@@ -39,6 +40,16 @@ namespace CardGame
         {
             listOfCards.Remove(GetTopCard());
         }
+        public string ChoosenAttribute(Player player)
+        {
+            Dictionary<string, double> dictioanryOfChoices = new Dictionary<string, double>();
+            dictioanryOfChoices["hp"] = player.topCard.HP / (double)Hp;
+            dictioanryOfChoices["attack"] = player.topCard.Attack / (double)Attack;
+            dictioanryOfChoices["defend"] = player.topCard.Defend / (double)Defense;
+            dictioanryOfChoices["speed"] = player.topCard.Speed / (double)Speed;
 
+            return dictioanryOfChoices.Aggregate((x, y) => x.Value > y.Value ? x : y).Key;
+
+        }
     }
 }
